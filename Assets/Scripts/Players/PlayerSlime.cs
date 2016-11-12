@@ -294,5 +294,16 @@ public abstract class PlayerSlime : MonoBehaviour {
         //Vector3 moment = rBody.velocity + coll.GetComponent<Rigidbody2D>().velocity;
         //Vector3 unitMoment = moment.normalized;
         
+        if (coll.gameObject.tag == "Health") //If the player is picking up health
+        {
+            health += 5; //Give the player health
+
+            if (health > 200) //If the player's health is over 200
+            {
+                health = 200; //Cap the health
+            }
+
+            Destroy(coll.gameObject); //Destroy the health pickup
+        }
     }
 }

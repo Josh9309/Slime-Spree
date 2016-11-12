@@ -15,6 +15,7 @@ public abstract class Enemy : MonoBehaviour {
     public float maxSpeed;
     [SerializeField] protected PlayerSlime.SlimeType slimeType;
     protected bool canTriggerGoal;
+    [SerializeField] private GameObject healthDrop; //Drop health for the player
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
     #region Properties
@@ -80,7 +81,11 @@ public abstract class Enemy : MonoBehaviour {
     {
         if( health <= 0)
         {
-            Debug.Log("Enemy has died");
+            if(50 >= Random.Range(0, 101)) //If the enemy should drop health
+            {
+                Instantiate(healthDrop, transform.position, Quaternion.identity); //Drop health
+            }
+
             Destroy(gameObject);
         }
     }
