@@ -3,7 +3,10 @@ using System.Collections;
 using System;
 
 public class RedSlimePlayer : PlayerSlime {
-    
+    #region Attributes
+    [SerializeField] private float SlimeBurstRange = 2;
+    [SerializeField] private int SlimeBurstCost = 20;
+    #endregion
 
     // Use this for initialization
     new void Start()
@@ -15,11 +18,32 @@ public class RedSlimePlayer : PlayerSlime {
 	new void Update()
     {
         base.Update(); //Call the base update method
+        SlimeAttack2();
+        input.ResetBtns();
 	}
 
+    //Red Slime SlimeBurst AOE Attack
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        if (input.trap)
+        {
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
+            Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z));
+
+            foreach (Collider2D thing in cols)
+            {
+                if (thing.tag == "Enemy")// the slime burst has hit a enemy
+                {
+                    Enemy slimeEnemy = thing.GetComponent<Enemy>();
+
+                    //check to see if enemy slime is not same type as player
+                    if (slimeEnemy.SlimeType != PlayerSlime.SlimeType.RED)
+                    {
+                        slimeEnemy.health = 0; //kill enemy
+                    }
+                }
+            }
+        }
     }
 
     protected override void SlimeAttack2Cooldown()

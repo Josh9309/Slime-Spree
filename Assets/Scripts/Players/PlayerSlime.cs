@@ -99,7 +99,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
-    private InputSettings input = new InputSettings();
+    protected InputSettings input = new InputSettings();
     #endregion
 
     #region Properties

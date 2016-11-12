@@ -9,13 +9,13 @@ public class GoalEnemy : Enemy {
     //--------------------
 
 	// Use this for initialization
-	public override void Start () {
+	void Start () {
         base.Start();
 	}
 	
 	// Update is called once per frame
-	public override void Update () {
-        Move();
+	void Update () {
+        base.Update();
 	}
 
 }
