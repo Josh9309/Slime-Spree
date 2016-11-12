@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     #region Fields
     //Assigned in inspector
     public List<PlayerSlime> players = new List<PlayerSlime>();
+    public GameObject Goal;
     #endregion
 
     #region Properties
@@ -20,6 +21,10 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        //set goal
+        Goal = (GameObject)Instantiate(Goal, new Vector3(0, 0, 0), Quaternion.identity);
+
+        //start game
         StartGame();
     }
 
