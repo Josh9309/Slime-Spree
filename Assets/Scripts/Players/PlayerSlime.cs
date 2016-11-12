@@ -95,6 +95,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
     [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
+    [SerializeField] private float knockbackScale;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -220,6 +221,7 @@ public abstract class PlayerSlime : MonoBehaviour {
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
+            transform.up = rBody.velocity;
         }
         else
         {
@@ -227,6 +229,7 @@ public abstract class PlayerSlime : MonoBehaviour {
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
+            //transform.up = rBody.velocity;
         }
         //Debug.Log(rBody.velocity);
     }
