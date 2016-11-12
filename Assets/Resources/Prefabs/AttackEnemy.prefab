@@ -153,11 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece2f7392b96fcb4eb03c0fbe6db764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   health: 2
   damage: 2
   knockback: 2
   target: {fileID: 0}
+  maxSpeed: 2
 --- !u!212 &21216546
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -203,7 +204,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: moveSpeed
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health
@@ -215,6 +216,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: knockback
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

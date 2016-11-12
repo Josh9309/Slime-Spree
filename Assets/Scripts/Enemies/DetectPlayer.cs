@@ -30,6 +30,9 @@ public class DetectPlayer : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// detect if a player entrs the collider and assign it
+    /// </summary>
     public void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.transform.tag == "Player")
