@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
     public void StartRound()
     {
         // spawn the first wave
-        LevelManager.Instance.SpawnEnemies();
+        LevelManager.Instance.SpawnEnemies(10, 5);
     }
 
 

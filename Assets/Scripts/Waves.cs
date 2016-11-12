@@ -12,7 +12,6 @@ public class Waves : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-       
         wave = 1;
 
     }
@@ -28,7 +27,9 @@ public class Waves : MonoBehaviour {
         {
             //go to the next wave
             wave += 1;
-            LevelManager.Instance.SpawnEnemies();
+            attackEnemies = wave * 5;
+            goalEnemies = wave * 3;
+            LevelManager.Instance.SpawnEnemies(attackEnemies, goalEnemies);
         }
 
        // attackEnemies = wave * 3;

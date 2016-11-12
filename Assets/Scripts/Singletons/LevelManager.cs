@@ -55,11 +55,12 @@ public class LevelManager : Singleton<LevelManager>
     /// i.e when all enemies in the previous wave
     /// are killed
     /// </summary>
-    public void SpawnEnemies()
+    public void SpawnEnemies(int attack, int goal)
     {
         // assign each goalEnemy to the goalEnemy list
-        // start by making 2 goalEnemies in random positions
-        for (int i = 0; i < 10; i++)
+        // makes 'attack' number of enemies
+
+        for (int i = 0; i < attack; i++)
         {
             // calculate a random position around the centroid, assign each enemy a random pos
             Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
@@ -72,8 +73,7 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         // spawn enemies that attack the player, this will always be 
-        // goal enemies divided by 2
-        for (int i = 0; i < 10 / 2; i++)
+        for (int i = 0; i < goal; i++)
         {
             // calculate a random position around the centroid, assign each enemy a random pos
             Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
