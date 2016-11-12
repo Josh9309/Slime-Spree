@@ -284,15 +284,4 @@ public abstract class PlayerSlime : MonoBehaviour {
         transform.localScale = new Vector3(scaled, scaled, 1);
       
     }
-
-    /// <summary>
-    /// detect if the player is colliding with anything
-    /// </summary>
-    public void OnTriggerEnter2D(Collider2D coll)
-    {
-        // knockback
-        //Vector3 moment = rBody.velocity + coll.GetComponent<Rigidbody2D>().velocity;
-        //Vector3 unitMoment = moment.normalized;
-        
-    }
 }

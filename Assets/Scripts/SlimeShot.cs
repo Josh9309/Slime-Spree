@@ -66,5 +66,9 @@ public class SlimeShot : MonoBehaviour {
             enemySlime.health -= damage;
             Destroy(this.gameObject); //Destroy the slime shot
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
