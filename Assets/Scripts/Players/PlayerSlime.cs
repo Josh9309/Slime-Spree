@@ -95,6 +95,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
     private GameObject reticle; //The reticle
+    private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
     private InputSettings input = new InputSettings();
     #endregion
@@ -142,6 +143,7 @@ public abstract class PlayerSlime : MonoBehaviour {
         input.ConfigureInput(playerNum);
 
         reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
     }
 	
 	//Update is called once per frame
@@ -211,11 +213,13 @@ public abstract class PlayerSlime : MonoBehaviour {
         if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
         {
             Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
-            reticle.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
+            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 1); //Turn up the reticle's alpha
+            reticle.transform.position = new Vector2(gameObject.transform.position.x + (input.horizontalAimAxis * slimeShotRange), gameObject.transform.position.y - (input.verticalAimAxis * slimeShotRange)); //Update the reticle's position
         }
         else //If the player is not aiming
         {
             //Debug.Log("Ayy");
+            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 0); //Turn down the reticle's alpha
             reticle.transform.position = gameObject.transform.position; //Place the reticle at the player's position
         }
     }
