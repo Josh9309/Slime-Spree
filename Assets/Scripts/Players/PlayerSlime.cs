@@ -95,6 +95,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
     [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
+    [SerializeField] private float knockbackScale;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -273,5 +274,16 @@ public abstract class PlayerSlime : MonoBehaviour {
     protected void ScaleSlime()
     {
 
+    }
+
+    /// <summary>
+    /// detect if the player is colliding with anything
+    /// </summary>
+    public void OnTriggerEnter2D(Collider2D coll)
+    {
+        // knockback
+        //Vector3 moment = rBody.velocity + coll.GetComponent<Rigidbody2D>().velocity;
+        //Vector3 unitMoment = moment.normalized;
+        
     }
 }

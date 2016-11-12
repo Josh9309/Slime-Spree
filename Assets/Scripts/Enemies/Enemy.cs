@@ -16,6 +16,13 @@ public abstract class Enemy : MonoBehaviour {
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
 
+    //-----ACCESSORS-----
+    public int Damage
+    {
+        get { return damage; }
+    }
+    //-------------------
+
     // Use this for initialization
     public virtual void Start () {
         rb = this.GetComponent<Rigidbody2D>();
