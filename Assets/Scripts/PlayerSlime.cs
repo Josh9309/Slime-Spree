@@ -197,5 +197,25 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     protected abstract void SlimeAttack2();
 
-    protected abstract void SlimeTrap();
+    protected abstract void SlimeUltimate();
+
+    protected virtual void SlimeShotCooldown()
+    {
+
+    }
+
+    protected abstract void SlimeAttack2Cooldown();
+
+    protected abstract void SlimeUltimateCooldown();
+
+    protected void ModHealth(int mod)
+    {
+        health += mod; //modifies the health 
+        ScaleSlime(); //rescales the playerSlime
+    }
+
+    protected void ScaleSlime()
+    {
+
+    }
 }
