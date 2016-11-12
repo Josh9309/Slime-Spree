@@ -70,7 +70,13 @@ public abstract class PlayerSlime : MonoBehaviour {
     #endregion
 
     #region Properties
+    //get ste hp
+    int getHealth() { return health; }
+    void sethealth(int value) { health = value; }
 
+    //get set slime type
+    SlimeType getSlimeType() { return slimerType; }
+    void setSlimeType(SlimeType value) { slimerType = value; }
     #endregion
 
     // Use this for initialization
