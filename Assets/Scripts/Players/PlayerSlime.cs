@@ -94,6 +94,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
+    [SerializeField] private GameObject SlimeShotPrefab;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
@@ -127,6 +128,11 @@ public abstract class PlayerSlime : MonoBehaviour {
             }
             else { playerNum = value; }
         }
+    }
+
+    public int SlimeShotDamage
+    {
+        get { return slimeShotDamage; }
     }
     #endregion
 
