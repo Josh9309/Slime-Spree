@@ -137,14 +137,6 @@ public abstract class PlayerSlime : MonoBehaviour {
         get { return slimeShotDamage; }
     }
 
-    public SpriteRenderer PlayerSR //PlayerSR property
-    {
-        get
-        {
-            return playerSR; //Return the player's sprite renderer
-        }
-    }
-
     public GameObject Reticle //Reticle property
     {
         get
@@ -175,6 +167,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 	protected void Update()
     {
         Aim(); //Aim
+        SlimeShotCooldown(); //The slime shot's cooldown
 	}
 
 	// Update is called once per frame
@@ -239,9 +232,10 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
 
-            if (input.fireLeftInput != 0 || input.fireRightInput != 0) //If the player is firing
+            if ((input.fireLeftInput != 0 || input.fireRightInput != 0) && damage1Cooldown <= 0.0f) //If the player is firing
             {
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
+                damage1Cooldown = 0.75f; //Set the damage cooldown
             }
         }
         else //If the player is not aiming
@@ -258,7 +252,10 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     protected virtual void SlimeShotCooldown()
     {
-
+        if (damage1Cooldown > 0) //If the slime shot has been activated
+        {
+            damage1Cooldown -= Time.deltaTime; //Decrement the cooldown
+        }
     }
 
     protected abstract void SlimeAttack2Cooldown();

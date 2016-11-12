@@ -11,7 +11,6 @@ public class SlimeShot : MonoBehaviour {
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
     private Rigidbody2D rBody;
-    private SpriteRenderer shotSR; //The slime shot's sprite renderer
     #endregion
 
     // Use this for initialization
@@ -39,8 +38,6 @@ public class SlimeShot : MonoBehaviour {
         slimePlayerScript = player.GetComponent<PlayerSlime>(); //Get the player's script
         slimeShotTarget = slimePlayerScript.Reticle.transform.position; //The target of the slime shot
         rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
-        shotSR = GetComponent<SpriteRenderer>(); //Get the slime shot's sprite renderer
-        shotSR.color = slimePlayerScript.PlayerSR.color; //Set the shot's color to be the same as the player's color
 
         damage = slimePlayerScript.SlimeShotDamage;
     }
@@ -48,14 +45,20 @@ public class SlimeShot : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        rBody.velocity = transform.position + slimeShotTarget; //Add forces to shoot the slime shot
+        rBody.AddForce((slimeShotTarget - transform.position) * 5); //Add forces to shoot the slime shot
+
+        if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
+        {
+            Debug.Log(new Vector2(Mathf.Abs(slimeShotTarget.x - rBody.position.x), Mathf.Abs(slimeShotTarget.y - rBody.position.y)));
+            Destroy(this.gameObject); //Destroy the slime shot
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll) //Collisions with the slime shot
     {
         if (coll.gameObject.tag == "Enemy") //If the slime is colliding with the enemy
         {
-            Debug.Log("AWWWWW NO");
+            Destroy(this.gameObject); //Destroy the slime shot
         }
     }
 }

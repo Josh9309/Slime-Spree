@@ -83,9 +83,10 @@ MonoBehaviour:
   damage1Cooldown: 0
   damage2Cooldown: 0
   slimerType: 3
-  slimeShotRange: 5
+  slimeShotRange: 7
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
   slimeShotGameObject: {fileID: 146074, guid: 94d25e19073d8ea4c977bc3199ecfb7c, type: 2}
+  knockbackScale: 0
 --- !u!212 &21237060
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -139,7 +140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotRange
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotPrefab
