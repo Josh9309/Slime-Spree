@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class PlayerSlime : MonoBehaviour {
     public enum SlimeType { RED, BLUE, YELLOW, GREEN };
 
@@ -75,6 +76,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
+    private Rigidbody2D body;
     #endregion
 
     #region Properties
@@ -109,8 +111,13 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        //Assign body
+        body = GetComponent<Rigidbody2D>();
+
+        //turn off gravity on our rigidbody
+        body.gravityScale = 0;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
