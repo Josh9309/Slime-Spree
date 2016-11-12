@@ -19,6 +19,18 @@ public class AttackEnemy : Enemy {
     /// </summary>
     public override void OnCollisionEnter2D(Collision2D coll)
     {
-       
+        if (coll.transform.tag == "Player")
+        {
+
+            //Debug.Log(name + " is hitting " + coll.transform.name);
+            //health -= coll.GetComponent<Enemy>().Damage;
+            rb.AddForce(-1 * transform.up * knockbackScale);
+            coll.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * knockbackScale);
+            //coll.GetComponent<PlayerSlime>().Health--;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

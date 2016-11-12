@@ -84,13 +84,5 @@ public abstract class Enemy : MonoBehaviour {
     /// </summary>
     public virtual void OnCollisionEnter2D(Collision2D coll)
     {
-        // if enemies collide with a projectile decrement their health
-        // and destroy the prjectile
-        if (coll.transform.tag == "Projectile")
-        {
-            rb.AddForce(coll.transform.up * knockbackScale);
-
-            health--;
-        }
     }
 }
