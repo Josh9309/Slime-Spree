@@ -23,7 +23,7 @@ public class DetectPlayer : MonoBehaviour {
             Vector3 currDist = this.GetComponentInParent<AttackEnemy>().target.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
             Vector3 newDist = coll.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
 
-            if (newDist.x < currDist.x && newDist.y < currDist.y)
+            if (newDist.magnitude < currDist.magnitude)
             {
                 this.GetComponentInParent<AttackEnemy>().target = coll.gameObject;
             }
@@ -37,7 +37,7 @@ public class DetectPlayer : MonoBehaviour {
             Vector3 currDist = this.GetComponentInParent<AttackEnemy>().target.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
             Vector3 newDist = coll.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
 
-            if (newDist.x < currDist.x && newDist.y < currDist.y)
+            if (newDist.magnitude < currDist.magnitude)
             {
                 this.GetComponentInParent<AttackEnemy>().target = coll.gameObject;
             }
