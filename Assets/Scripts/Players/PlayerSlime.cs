@@ -275,9 +275,11 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     protected void ScaleSlime()
     {//min size is 1 as scale, max is 3.58, range between is 2.58:: 1 hp = .0258 scale
+        //find scale range
+        float range = (fullScale.x - 1.000f) / 100.000f;
 
         //make scale be that percent
-        float scaled = 1.0000f + (.0258f * health);
+        float scaled = 1.0000f + (range * health);
         transform.localScale = new Vector3(scaled, scaled, 1);
       
     }
