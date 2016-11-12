@@ -13,8 +13,6 @@ public class LevelManager : Singleton<LevelManager>
     public GameObject goalEnemyPrefab;
     private int level = 0;
     private float maxXSpawn = 11;
-    private float minXSpawn = 10;
-    private float minYSpawn = 10;
     private float maxYSpawn = 7;
 	#endregion
 
@@ -62,9 +60,11 @@ public class LevelManager : Singleton<LevelManager>
         for (int i = 0; i < 10; i++)
         {
             // calculate a random position around the centroid, assign each enemy a random pos
-            Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 1)),
-                                          Random.Range(5f, maxYSpawn) * Mathf.Ceil(Random.Range(-1, 1)),
+            Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
+                                          Random.Range(5f, maxYSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
                                           0);
+
+            Debug.Log(randPos);
 
             goalEnemies.Add((GameObject)Instantiate(goalEnemyPrefab, randPos, Quaternion.identity));
             goalEnemies[i].GetComponent<GoalEnemy>().target = GameObject.Find("Goal");
