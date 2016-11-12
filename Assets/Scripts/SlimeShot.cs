@@ -53,7 +53,6 @@ public class SlimeShot : MonoBehaviour {
 
         if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
         {
-            Debug.Log(new Vector2(Mathf.Abs(slimeShotTarget.x - rBody.position.x), Mathf.Abs(slimeShotTarget.y - rBody.position.y)));
             Destroy(this.gameObject); //Destroy the slime shot
         }
     }
