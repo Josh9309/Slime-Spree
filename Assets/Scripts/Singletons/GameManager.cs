@@ -20,11 +20,15 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        StartGame();
     }
 
     public void StartGame()
     {
         //MenuManager.Instance.GoToScreen("GameScreen");
+
+        // spawn the first wave
+        StartRound();
     }
 
     /// <summary>
@@ -32,6 +36,8 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void StartRound()
     {
+        // spawn the first wave
+        LevelManager.Instance.SpawnEnemies();
     }
 
 

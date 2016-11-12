@@ -12,12 +12,13 @@ public abstract class Enemy : MonoBehaviour {
     public float knockback;
     protected SpriteRenderer enemySprite;
     public GameObject target;
+    //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start () {
         rb = this.GetComponent<Rigidbody2D>();
-
+        //transform.position = startPos;
         enemySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -30,4 +31,9 @@ public abstract class Enemy : MonoBehaviour {
     /// enemy, or the goal for a standard one
     /// </summary>
     public abstract void Seek();
+
+    /// <summary>
+    /// responsible for moving the enemy
+    /// </summary>
+    public abstract void Move();
 }
