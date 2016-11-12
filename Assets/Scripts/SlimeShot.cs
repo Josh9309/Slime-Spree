@@ -62,6 +62,8 @@ public class SlimeShot : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy") //If the slime is colliding with the enemy
         {
+            Enemy enemySlime = GetComponent<Enemy>();
+            enemySlime.health -= damage;
             Destroy(this.gameObject); //Destroy the slime shot
         }
     }
