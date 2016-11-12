@@ -84,6 +84,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     #region Attributes
     [SerializeField] protected int health = 100;
     [SerializeField] protected float speed = 10.0f;
+    [SerializeField] private float deceleration = 1.5f;
     [SerializeField] protected int playerNum = 1;
     [SerializeField] protected int attack1Down;
     [SerializeField] protected int slimeShotDamage;
@@ -93,6 +94,8 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
+    private GameObject reticle; //The reticle
+    private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
     private InputSettings input = new InputSettings();
     #endregion
@@ -139,7 +142,8 @@ public abstract class PlayerSlime : MonoBehaviour {
         //configure InputManager
         input.ConfigureInput(playerNum);
 
-        Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
     }
 	
 	//Update is called once per frame
@@ -184,12 +188,19 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
         {
-            rBody.velocity = new Vector2(input.horizontalInput * speed, input.verticalInput * speed);
+            rBody.AddForce(new Vector2(input.horizontalInput * speed, -input.verticalInput * speed));
+            float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
+            float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
+            rBody.velocity = new Vector2(velx, vely);
         }
         else
         {
-            rBody.velocity = Vector2.zero;
+            rBody.AddForce(new Vector2(-rBody.velocity.x / deceleration, -rBody.velocity.y /deceleration));
+            float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
+            float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
+            rBody.velocity = new Vector2(velx, vely);
         }
+        Debug.Log(rBody.velocity);
     }
 
     protected virtual void SlimeShotAttack()
@@ -202,11 +213,14 @@ public abstract class PlayerSlime : MonoBehaviour {
         if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
         {
             Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
-            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
+            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 1); //Turn up the reticle's alpha
+            reticle.transform.position = new Vector2(gameObject.transform.position.x + (input.horizontalAimAxis * slimeShotRange), gameObject.transform.position.y - (input.verticalAimAxis * slimeShotRange)); //Update the reticle's position
         }
         else //If the player is not aiming
         {
-            reticleSprite.transform.position = gameObject.transform.position; //Place the reticle at the player's position
+            //Debug.Log("Ayy");
+            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 0); //Turn down the reticle's alpha
+            reticle.transform.position = gameObject.transform.position; //Place the reticle at the player's position
         }
     }
 

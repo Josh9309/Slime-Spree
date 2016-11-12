@@ -30,10 +30,21 @@ public abstract class Enemy : MonoBehaviour {
     /// This can be either the player for an agressive
     /// enemy, or the goal for a standard one
     /// </summary>
-    public abstract void Seek();
+    public Vector3 Seek()
+    {
+        Vector3 offset = target.transform.position - this.transform.position;
+        Vector3 unitOffset = offset.normalized;
+        return unitOffset;
+    }
 
     /// <summary>
     /// responsible for moving the enemy
     /// </summary>
-    public abstract void Move();
+    public void Move()
+    {
+        Vector3 unitOffset = Seek();
+        transform.up = unitOffset;
+        rb.velocity = unitOffset * moveSpeed;
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+    }
 }
