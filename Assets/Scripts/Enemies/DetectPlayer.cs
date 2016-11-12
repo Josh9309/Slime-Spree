@@ -20,7 +20,27 @@ public class DetectPlayer : MonoBehaviour {
     {
         if (coll.transform.tag == "Player")
         {
-            this.GetComponentInParent<AttackEnemy>().target = coll.gameObject;
+            Vector3 currDist = this.GetComponentInParent<AttackEnemy>().target.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
+            Vector3 newDist = coll.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
+
+            if (newDist.x < currDist.x && newDist.y < currDist.y)
+            {
+                this.GetComponentInParent<AttackEnemy>().target = coll.gameObject;
+            }
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.transform.tag == "Player")
+        {
+            Vector3 currDist = this.GetComponentInParent<AttackEnemy>().target.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
+            Vector3 newDist = coll.transform.position - this.GetComponentInParent<AttackEnemy>().transform.position;
+
+            if (newDist.x < currDist.x && newDist.y < currDist.y)
+            {
+                this.GetComponentInParent<AttackEnemy>().target = coll.gameObject;
+            }
         }
     }
 }
