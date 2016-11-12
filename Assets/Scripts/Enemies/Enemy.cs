@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour {
     public float knockback;
     protected SpriteRenderer enemySprite;
     public GameObject target;
+    public float maxSpeed;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
 
@@ -44,7 +45,13 @@ public abstract class Enemy : MonoBehaviour {
     {
         Vector3 unitOffset = Seek();
         transform.up = unitOffset;
-        rb.velocity = unitOffset * moveSpeed;
-        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        Vector3 acceleration = unitOffset * moveSpeed;
+        rb.AddForce(acceleration);
+        float velX = Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed);
+        float velY = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
+
+        rb.velocity = new Vector3(velX, velY, 0);
+        //rb.velocity = unitOffset * moveSpeed;
+        //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
     }
 }

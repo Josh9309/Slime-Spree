@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 5
-  deceleration: 1.5
+  speed: 7
+  deceleration: 1.79999995
   playerNum: 2
   attack1Down: 0
   slimeShotDamage: 0
@@ -123,11 +123,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: speed
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deceleration
-      value: 1.20000005
+      value: 1.79999995
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x

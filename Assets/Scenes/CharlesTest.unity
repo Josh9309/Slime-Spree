@@ -124,14 +124,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 11488218, guid: 70b61c6c83ad2854f8a5f1fbb24cef1c, type: 2}
-      propertyPath: goalEnemyPrefab
-      value: 
-      objectReference: {fileID: 150500, guid: 3c038f27d0e270f4aa1e6b8271ab0cb1, type: 2}
-    - target: {fileID: 11488218, guid: 70b61c6c83ad2854f8a5f1fbb24cef1c, type: 2}
-      propertyPath: attackEnemyPrefab
-      value: 
-      objectReference: {fileID: 184850, guid: 83bbb5806af50194ea0d3003ecc4cd6a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70b61c6c83ad2854f8a5f1fbb24cef1c, type: 2}
   m_IsPrefabParent: 0
@@ -193,8 +185,8 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 61
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -216,8 +208,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 557786323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalScale: {x: 2.55292797, y: 2.55292869, z: 2.55292869}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -260,10 +252,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11470284, guid: 5ef2d38448276394fb2ad4c439f90686, type: 2}
-      propertyPath: Goal
-      value: 
-      objectReference: {fileID: 150124, guid: b587cd65314012e4c967110bf5fe7a4d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ef2d38448276394fb2ad4c439f90686, type: 2}
   m_IsPrefabParent: 0
