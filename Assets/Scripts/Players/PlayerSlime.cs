@@ -173,6 +173,11 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         Aim(); //Aim
         SlimeShotCooldown(); //The slime shot's cooldown
+
+        if (health <= 0) //If the player has no health
+        {
+            Destroy(gameObject); //He's dead, Jim!
+        }
 	}
 
 	// Update is called once per frame
@@ -241,7 +246,8 @@ public abstract class PlayerSlime : MonoBehaviour {
             if ((input.fireLeftInput != 0 || input.fireRightInput != 0) && damage1Cooldown <= 0.0f) //If the player is firing
             {
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
-                damage1Cooldown = 0.75f; //Set the damage cooldown
+                health--; //Decrement the player's health
+                damage1Cooldown = 0.65f; //Set the damage cooldown
             }
         }
         else //If the player is not aiming
