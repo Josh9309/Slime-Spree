@@ -93,6 +93,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
+    private GameObject reticle; //The reticle
     private Rigidbody2D rBody;
     private InputSettings input = new InputSettings();
     #endregion
@@ -139,7 +140,7 @@ public abstract class PlayerSlime : MonoBehaviour {
         //configure InputManager
         input.ConfigureInput(playerNum);
 
-        Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
     }
 	
 	//Update is called once per frame
@@ -184,7 +185,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
         {
-            rBody.velocity = new Vector2(input.horizontalInput * speed, input.verticalInput * speed);
+            rBody.velocity = new Vector2(input.horizontalInput * speed, -input.verticalInput * speed);
         }
         else
         {
@@ -202,11 +203,12 @@ public abstract class PlayerSlime : MonoBehaviour {
         if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
         {
             Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
-            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
+            reticle.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
         }
         else //If the player is not aiming
         {
-            reticleSprite.transform.position = gameObject.transform.position; //Place the reticle at the player's position
+            Debug.Log("Ayy");
+            reticle.transform.position = gameObject.transform.position; //Place the reticle at the player's position
         }
     }
 
