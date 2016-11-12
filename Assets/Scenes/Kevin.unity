@@ -262,7 +262,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11486378, guid: cf89dd57da3ad9146bed26c27b6b3967, type: 2}
       propertyPath: slimeShotRange
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf89dd57da3ad9146bed26c27b6b3967, type: 2}
