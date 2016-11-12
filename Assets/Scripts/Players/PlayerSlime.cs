@@ -97,6 +97,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] private GameObject SlimeShotPrefab;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
+    private SpriteRenderer playerSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
     private InputSettings input = new InputSettings();
     #endregion
@@ -150,6 +151,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
         reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
         reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
+        playerSR = GetComponent<SpriteRenderer>(); //Get the player's sprite renderer
     }
 	
 	//Update is called once per frame
@@ -206,7 +208,7 @@ public abstract class PlayerSlime : MonoBehaviour {
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
         }
-        Debug.Log(rBody.velocity);
+        //Debug.Log(rBody.velocity);
     }
 
     protected virtual void SlimeShotAttack()
@@ -221,13 +223,13 @@ public abstract class PlayerSlime : MonoBehaviour {
             float xLocation = Mathf.Cos(Mathf.Atan2(input.verticalAimAxis, input.horizontalAimAxis)) * slimeShotRange; //Set the reticle's x location
             float yLocation = Mathf.Cos(Mathf.Atan2(input.horizontalAimAxis, input.verticalAimAxis)) * slimeShotRange; //Set the reticle's y location
 
-            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 1); //Turn up the reticle's alpha
+            reticleSR.color = new Color(playerSR.color.r, playerSR.color.g, playerSR.color.b, 1); //Turn up the reticle's alpha
 
             reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
         }
         else //If the player is not aiming
         {
-            reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 0); //Turn down the reticle's alpha
+            reticleSR.color = new Color(playerSR.color.r, playerSR.color.g, playerSR.color.b, 0); //Turn down the reticle's alpha
 
             reticle.transform.position = gameObject.transform.position; //Place the reticle at the player's position
         }
