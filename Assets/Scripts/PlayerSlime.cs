@@ -76,7 +76,8 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
-    private Rigidbody2D body;
+    private Rigidbody2D rBody;
+    private InputSettings input = new InputSettings();
     #endregion
 
     #region Properties
@@ -112,17 +113,61 @@ public abstract class PlayerSlime : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //Assign body
-        body = GetComponent<Rigidbody2D>();
+        rBody = GetComponent<Rigidbody2D>();
 
         //turn off gravity on our rigidbody
-        body.gravityScale = 0;
+        rBody.gravityScale = 0;
+
+        //configure InputManager
+        input.ConfigureInput(playerNum);
 
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void FixedUpdate () {
+        GetInput();
+        Move();
+
 	}
+
+    protected void GetInput()
+    {
+        //gets all value based input checks
+        input.horizontalInput = Input.GetAxis(input.HORIZONTAL_AXIS);
+        input.verticalInput = Input.GetAxis(input.VERTICAL_AXIS);
+        input.attack1Input = Input.GetAxis(input.ATTACK1_AXIS);
+        input.attack2Input = Input.GetAxis(input.ATTACK2_AXIS);
+
+        //button input checks
+        if (!input.attack1)
+        {
+            input.attack1 = Input.GetButtonDown(input.ATTACK1_AXIS);
+        }
+        if (!input.attack2)
+        {
+            input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
+        }
+        if (!input.attack2)
+        {
+            input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
+        }
+        if (!input.pause)
+        {
+            input.pause = Input.GetButtonDown(input.PAUSE_AXIS);
+        }
+    }
+
+    protected void Move()
+    {
+        if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
+        {
+            rBody.velocity = new Vector2(input.horizontalInput * speed, input.verticalInput * speed);
+        }
+        else
+        {
+            rBody.velocity = Vector2.zero;
+        }
+    }
 
     protected virtual void SlimeShotAttack()
     {
