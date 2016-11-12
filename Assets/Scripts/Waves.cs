@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,11 +9,13 @@ public class Waves : MonoBehaviour {
     public int goalEnemies;
     public int wave;
     int numPlayers;
+    public Text text;
     //spawn types 
     // Use this for initialization
     void Start()
     {
-        wave = 1;     
+        wave = 1;
+       
     }
 	// Update is called once per frame
 	void Update ()
@@ -33,7 +36,13 @@ public class Waves : MonoBehaviour {
             //spawn
             LevelManager.Instance.SpawnEnemies(attackEnemies, goalEnemies);
         }
-	}
+        UpdateWave();
+    }
+
+    void UpdateWave()
+    {
+        text.text = "Wave: " + wave;
+    }
 
   
 }
