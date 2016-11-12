@@ -11,44 +11,51 @@ public class SlimeShot : MonoBehaviour {
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
     private Rigidbody2D rBody;
+    private SpriteRenderer shotSR; //The slime shot's sprite renderer
     #endregion
+
     // Use this for initialization
-    void Start () {
+    void Awake ()
+    {
         switch (slimeType)
         {
             case PlayerSlime.SlimeType.BLUE:
                 player = GameObject.Find("BlueSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
                 break;
 
             case PlayerSlime.SlimeType.RED:
                 player = GameObject.Find("RedSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
                 break;
 
             case PlayerSlime.SlimeType.GREEN:
                 player = GameObject.Find("GreenSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
                 break;
 
             case PlayerSlime.SlimeType.YELLOW:
                 player = GameObject.Find("BlueSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
                 break;
         }
         damage = slimePlayerScript.SlimeShotDamage;
-        slimeShotTarget = player.transform.Find("Reticle").position;
+        //slimeShotTarget = player.transform.Find("Reticle").transform.position;
 
-        rBody = GetComponent<Rigidbody2D>();
-	}
+        rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
+        slimePlayerScript = player.GetComponent<PlayerSlime>(); //Get the player's script
+        shotSR = GetComponent<SpriteRenderer>(); //Get the slime shot's sprite renderer
+        shotSR.color = slimePlayerScript.PlayerSR.color; //Set the shot's color to be the same as the player's color
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void Fire()
+	void Update ()
     {
-        //
+        Debug.Log(slimeShotTarget);
+        rBody.velocity = transform.position - player.GetComponentInChildren<GameObject>().transform.position; //Add forces to shoot the slime shot
+    }
+
+    void OnTriggerEnter2D(Collider2D coll) //Collisions with the slime shot
+    {
+        if (coll.gameObject.tag == "Enemy") //If the slime is colliding with the enemy
+        {
+            Debug.Log("AWWWWW NO");
+        }
     }
 }

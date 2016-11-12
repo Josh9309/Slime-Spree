@@ -85,7 +85,7 @@ MonoBehaviour:
   slimerType: 2
   slimeShotRange: 5
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
-  slimeShotPrefab: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
+  slimeShotGameObject: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
 --- !u!212 &21290164
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -144,14 +144,21 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: slimeShotPrefab
       value: 
-      objectReference: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11494774, guid: f7869ffb852e0e44f926a7dd8a15e5b5,
+        type: 2}
     - target: {fileID: 0}
       propertyPath: deceleration
       value: 1.79999995
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slimeShotScript
+      value: 
+      objectReference: {fileID: 11494774, guid: f7869ffb852e0e44f926a7dd8a15e5b5,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: slimeShotGameObject
+      value: 
+      objectReference: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 186942}

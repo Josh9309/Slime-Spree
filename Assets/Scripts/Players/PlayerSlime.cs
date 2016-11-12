@@ -94,7 +94,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
-    [SerializeField] private GameObject slimeShotPrefab;
+    [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -134,6 +134,14 @@ public abstract class PlayerSlime : MonoBehaviour {
     public int SlimeShotDamage
     {
         get { return slimeShotDamage; }
+    }
+
+    public SpriteRenderer PlayerSR //PlayerSR property
+    {
+        get
+        {
+            return playerSR; //Return the player's sprite renderer
+        }
     }
     #endregion
 
@@ -224,7 +232,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             if (input.fireLeftInput != 0 || input.fireRightInput != 0) //If the player is firing
             {
-                Debug.Log("The player is firing");
+                Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
             }
         }
         else //If the player is not aiming

@@ -14,6 +14,8 @@ public class BlueSlimePlayer : PlayerSlime {
     new void Update()
     {
         base.Update(); //Call the base update method
+
+       
     }
 
     protected override void SlimeAttack2()
