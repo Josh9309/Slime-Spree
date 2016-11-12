@@ -6,13 +6,13 @@ public class RedSlimePlayer : PlayerSlime {
     
 
     // Use this for initialization
-    void Start()
+    new void Start()
     {
         base.Start(); //Call the base start method
 	}
 	
 	// Update is called once per frame
-	void Update()
+	new void Update()
     {
         base.Update(); //Call the base update method
 	}

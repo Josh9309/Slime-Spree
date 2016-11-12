@@ -11,13 +11,13 @@ public abstract class PlayerSlime : MonoBehaviour {
     public class InputSettings
     {
         public float delay = 0.3f; //delay for movement inputs
-        public float horizontalInput = 0, verticalInput = 0, attack1Input = 0, attack2Input = 0; //sets up variables to hold inputs
-        public string HORIZONTAL_AXIS, VERTICAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS; //sets up variable to hold input_axis
+        public float horizontalInput = 0, verticalInput = 0, fireLeftInput = 0, fireRightInput = 0, horizontalAimAxis = 0, verticalAimAxis = 0; //sets up variables to hold inputs
+        public string HORIZONTAL_AXIS, VERTICAL_AXIS, FIRELEFT_AXIS, FIRERIGHT_AXIS, HORIZONTAL_AIM_AXIS, VERTICAL_AIM_AXIS, TRAP_AXIS, ULTIMATE_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
 
         //sets up booleans for btn_input and sets them to false
-        public bool attack1 = false;
-        public bool attack2 = false;
+        public bool trap = false;
+        public bool ultimate = false;
         public bool pause = false;
 
         public void ConfigureInput(int playerNum)
@@ -28,29 +28,45 @@ public abstract class PlayerSlime : MonoBehaviour {
                 case 1:
                     HORIZONTAL_AXIS = "P1_Horizontal";
                     VERTICAL_AXIS = "P1_Vertical";
-                    ATTACK1_AXIS = "P1_Attack1";
-                    ATTACK2_AXIS = "P1_Attack2";
+                    FIRELEFT_AXIS = "P1_FireLeft";
+                    FIRERIGHT_AXIS = "P1_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P1_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P1_VerticalAim";
+                    TRAP_AXIS = "P1_Trap";
+                    ULTIMATE_AXIS = "P1_Ultimate";
                     break;
 
                 case 2:
                     HORIZONTAL_AXIS = "P2_Horizontal";
                     VERTICAL_AXIS = "P2_Vertical";
-                    ATTACK1_AXIS = "P2_Attack1";
-                    ATTACK2_AXIS = "P2_Attack2";
+                    FIRELEFT_AXIS = "P2_FireLeft";
+                    FIRERIGHT_AXIS = "P2_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P2_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P2_VerticalAim";
+                    TRAP_AXIS = "P2_Trap";
+                    ULTIMATE_AXIS = "P2_Ultimate";
                     break;
 
                 case 3:
                     HORIZONTAL_AXIS = "P3_Horizontal";
                     VERTICAL_AXIS = "P3_Vertical";
-                    ATTACK1_AXIS = "P3_Attack1";
-                    ATTACK2_AXIS = "P3_Attack2";
+                    FIRELEFT_AXIS = "P3_FireLeft";
+                    FIRERIGHT_AXIS = "P3_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P3_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P3_VerticalAim";
+                    TRAP_AXIS = "P3_Trap";
+                    ULTIMATE_AXIS = "P3_Ultimate";
                     break;
 
                 case 4:
                     HORIZONTAL_AXIS = "P4_Horizontal";
                     VERTICAL_AXIS = "P4_Vertical";
-                    ATTACK1_AXIS = "P4_Attack1";
-                    ATTACK2_AXIS = "P4_Attack2";
+                    FIRELEFT_AXIS = "P4_FireLeft";
+                    FIRERIGHT_AXIS = "P4_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P4_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P4_VerticalAim";
+                    TRAP_AXIS = "P4_Trap";
+                    ULTIMATE_AXIS = "P4_Ultimate";
                     break;
             }
         }
@@ -58,8 +74,8 @@ public abstract class PlayerSlime : MonoBehaviour {
         public void ResetBtns()
         {
             //resets booleans for btn_input to false
-            attack1 = false;
-            attack2 = false;
+            trap = false;
+            ultimate = false;
             pause = false;
         }
     }
@@ -133,10 +149,10 @@ public abstract class PlayerSlime : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
+    {
         GetInput();
         Move();
-
 	}
 
     protected void GetInput()
@@ -144,21 +160,19 @@ public abstract class PlayerSlime : MonoBehaviour {
         //gets all value based input checks
         input.horizontalInput = Input.GetAxis(input.HORIZONTAL_AXIS);
         input.verticalInput = Input.GetAxis(input.VERTICAL_AXIS);
-        input.attack1Input = Input.GetAxis(input.ATTACK1_AXIS);
-        input.attack2Input = Input.GetAxis(input.ATTACK2_AXIS);
+        input.fireLeftInput = Input.GetAxis(input.FIRELEFT_AXIS);
+        input.fireRightInput = Input.GetAxis(input.FIRERIGHT_AXIS);
+        input.horizontalAimAxis = Input.GetAxisRaw(input.HORIZONTAL_AIM_AXIS);
+        input.verticalAimAxis = Input.GetAxisRaw(input.VERTICAL_AIM_AXIS);
 
         //button input checks
-        if (!input.attack1)
+        if (!input.trap)
         {
-            input.attack1 = Input.GetButtonDown(input.ATTACK1_AXIS);
+            input.trap = Input.GetButtonDown(input.TRAP_AXIS);
         }
-        if (!input.attack2)
+        if (!input.ultimate)
         {
-            input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
-        }
-        if (!input.attack2)
-        {
-            input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
+            input.ultimate = Input.GetButtonDown(input.ULTIMATE_AXIS);
         }
         if (!input.pause)
         {
@@ -185,9 +199,10 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     protected virtual void Aim() //Aiming the slime's attack
     {
-        if (Input.GetAxisRaw("HorizontalAim") != 0.0f || Input.GetAxisRaw("VerticalAim") != 0.0f) //If the player is aiming
+        if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
         {
-            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + Input.GetAxisRaw("HorizontalAim")) * slimeShotRange, (gameObject.transform.position.y - Input.GetAxisRaw("VerticalAim")) * slimeShotRange); //Update the reticle's position
+            Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
+            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
         }
         else //If the player is not aiming
         {
