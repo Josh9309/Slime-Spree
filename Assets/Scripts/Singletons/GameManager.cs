@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 {
     #region Fields
     //Assigned in inspector
-    public List<PlayerSlime> players = new List<PlayerSlime>();
+    public List<GameObject> players = new List<GameObject>();
     public GameObject Goal;
     #endregion
 
@@ -21,6 +21,14 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        //make players
+        players[0] = (GameObject)Instantiate(players[0], new Vector3(-2, 2, 0), Quaternion.identity);
+        players[1] = (GameObject)Instantiate(players[1], new Vector3(2, 2, 0), Quaternion.identity);
+        players[2] = (GameObject)Instantiate(players[2], new Vector3(2, -2, 0), Quaternion.identity);
+        players[3] = (GameObject)Instantiate(players[3], new Vector3(-2, -2, 0), Quaternion.identity);
+
+
+
         //set goal
         Goal = (GameObject)Instantiate(Goal, new Vector3(0, 0, 0), Quaternion.identity);
 
