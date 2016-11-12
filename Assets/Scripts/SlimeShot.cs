@@ -49,7 +49,7 @@ public class SlimeShot : MonoBehaviour {
     {
         shotDirection = (slimeShotTarget - transform.position).normalized;
 
-        rBody.AddForce(shotDirection * 10); //Add forces to shoot the slime shot
+        rBody.AddForce(shotDirection * shotSpeed); //Add forces to shoot the slime shot
 
         if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
         {

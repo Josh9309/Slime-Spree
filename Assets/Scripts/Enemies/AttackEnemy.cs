@@ -7,6 +7,8 @@ public class AttackEnemy : Enemy {
     // Use this for initialization
     protected override void Start () {
         base.Start();
+
+        canTriggerGoal = false;
     }
 
     // Update is called once per frame
@@ -21,12 +23,10 @@ public class AttackEnemy : Enemy {
     {
         if (coll.transform.tag == "Player")
         {
-
-            //Debug.Log(name + " is hitting " + coll.transform.name);
-            //health -= coll.GetComponent<Enemy>().Damage;
+            // knockback along inverted up vector
             rb.AddForce(-1 * transform.up * knockbackScale);
             coll.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * knockbackScale);
-            //coll.GetComponent<PlayerSlime>().Health--;
+            coll.transform.GetComponent<PlayerSlime>().Health -= damage;
         }
         else
         {

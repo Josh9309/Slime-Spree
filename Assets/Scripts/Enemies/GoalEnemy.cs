@@ -11,6 +11,8 @@ public class GoalEnemy : Enemy {
 	// Use this for initialization
 	void Start () {
         base.Start();
+
+        canTriggerGoal = true;
 	}
 	
 	// Update is called once per frame

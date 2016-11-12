@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour {
     public GameObject target;
     public float maxSpeed;
     [SerializeField] protected PlayerSlime.SlimeType slimeType;
+    protected bool canTriggerGoal;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
     #region Properties
@@ -24,6 +25,11 @@ public abstract class Enemy : MonoBehaviour {
     public int Damage
     {
         get { return damage; }
+    }
+
+    public bool CanTriggerGoal
+    {
+        get { return canTriggerGoal; }
     }
     #endregion
 

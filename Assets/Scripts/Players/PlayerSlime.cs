@@ -109,6 +109,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     public int Health
     {
         get { return health; }
+        set { health = value; }
     }
 
     //get set slime type
