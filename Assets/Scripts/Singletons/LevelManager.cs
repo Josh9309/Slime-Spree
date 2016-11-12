@@ -10,7 +10,9 @@ public class LevelManager : Singleton<LevelManager>
 	#region Fields
 	public List<GameObject> levels = new List<GameObject>();
     public List<GameObject> goalEnemies = new List<GameObject>();
+    public List<GameObject> attackEnemies = new List<GameObject>();
     public GameObject goalEnemyPrefab;
+    public GameObject attackEnemyPrefab;
     private int level = 0;
     private float maxXSpawn = 11;
     private float maxYSpawn = 7;
@@ -67,6 +69,19 @@ public class LevelManager : Singleton<LevelManager>
 
             goalEnemies.Add((GameObject)Instantiate(goalEnemyPrefab, randPos, Quaternion.identity));
             goalEnemies[i].GetComponent<GoalEnemy>().target = GameObject.FindGameObjectWithTag("Goal");
+        }
+
+        // spawn enemies that attack the player, this will always be 
+        // goal enemies divided by 2
+        for (int i = 0; i < 10 / 2; i++)
+        {
+            // calculate a random position around the centroid, assign each enemy a random pos
+            Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
+                                          Random.Range(5f, maxYSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
+                                          0);
+
+            attackEnemies.Add((GameObject)Instantiate(attackEnemyPrefab, randPos, Quaternion.identity));
+            attackEnemies[i].GetComponent<AttackEnemy>().target = GameManager.Instance.players[Random.Range(0, 4)];
         }
     }
 }
