@@ -13,25 +13,33 @@ public abstract class Enemy : MonoBehaviour {
     protected SpriteRenderer enemySprite;
     public GameObject target;
     public float maxSpeed;
+    [SerializeField] protected PlayerSlime.SlimeType slimeType;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
-
-    //-----ACCESSORS-----
+    #region Properties
+    public PlayerSlime.SlimeType SlimeType
+    {
+        get { return slimeType; }
+    }
     public int Damage
     {
         get { return damage; }
     }
-    //-------------------
+    #endregion
 
     // Use this for initialization
-    public virtual void Start () {
+    protected virtual void Start () {
         rb = this.GetComponent<Rigidbody2D>();
         //transform.position = startPos;
         enemySprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
-    public abstract void Update();
+    protected virtual void Update()
+    {
+        Move();
+        CheckIsAlive();
+    }
 
     /// <summary>
     /// responsible for seeking the enemy's target.
@@ -60,5 +68,14 @@ public abstract class Enemy : MonoBehaviour {
         rb.velocity = new Vector3(velX, velY, 0);
         //rb.velocity = unitOffset * moveSpeed;
         //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+    }
+
+    private void CheckIsAlive()
+    {
+        if( health <= 0)
+        {
+            Debug.Log("Enemy has died");
+            Destroy(gameObject);
+        }
     }
 }
