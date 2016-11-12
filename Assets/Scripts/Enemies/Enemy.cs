@@ -16,13 +16,17 @@ public abstract class Enemy : MonoBehaviour {
     [SerializeField] protected PlayerSlime.SlimeType slimeType;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
-
     #region Properties
     public PlayerSlime.SlimeType SlimeType
     {
         get { return slimeType; }
     }
+    public int Damage
+    {
+        get { return damage; }
+    }
     #endregion
+
     // Use this for initialization
     protected virtual void Start () {
         rb = this.GetComponent<Rigidbody2D>();

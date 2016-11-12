@@ -14,8 +14,8 @@ public class LevelManager : Singleton<LevelManager>
     public GameObject goalEnemyPrefab;
     public GameObject attackEnemyPrefab;
     private int level = 0;
-    private float maxXSpawn = 11;
-    private float maxYSpawn = 7;
+    private float maxXSpawn = 35;
+    private float maxYSpawn = 20;
 	#endregion
 
 	#region Properties

@@ -1,43 +1,43 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &172074
+--- !u!1 &146074
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 462642}
-  - 212: {fileID: 21223972}
-  - 58: {fileID: 5893652}
-  - 114: {fileID: 11486378}
-  - 50: {fileID: 5077266}
+  - 4: {fileID: 427274}
+  - 212: {fileID: 21277724}
+  - 58: {fileID: 5860952}
+  - 50: {fileID: 5009350}
+  - 114: {fileID: 11494774}
   m_Layer: 0
-  m_Name: RedSlime
-  m_TagString: Player
+  m_Name: YellowSlimeShot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &462642
+--- !u!4 &427274
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172074}
+  m_GameObject: {fileID: 146074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -2, z: 0}
-  m_LocalScale: {x: 3.58326244, y: 3.58326244, z: 3.58326244}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5077266
+--- !u!50 &5009350
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172074}
+  m_GameObject: {fileID: 146074}
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
@@ -47,51 +47,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5893652
+--- !u!58 &5860952
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172074}
+  m_GameObject: {fileID: 146074}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .319999993
---- !u!114 &11486378
+  m_Radius: .330000013
+--- !u!114 &11494774
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172074}
+  m_GameObject: {fileID: 146074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858419d1bb9ceb14e977cc5cb277fc4f, type: 3}
+  m_Script: {fileID: 11500000, guid: dc0f080a2d0efe34794e5a80e8d22c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 7
-  deceleration: 1.79999995
-  playerNum: 2
-  attack1Down: 0
-  slimeShotDamage: 1
-  slimeAttack2Damage: 0
-  slimeShotCooldown: 0
-  slimeAttack2Cooldown: 0
-  damage1Cooldown: 1
-  damage2Cooldown: 0
-  slimerType: 0
-  slimeShotRange: 5
-  reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
-  slimeShotGameObject: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
---- !u!212 &21223972
+  slimeType: 2
+--- !u!212 &21277724
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172074}
+  m_GameObject: {fileID: 146074}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -113,7 +99,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3811873816bd4b64eb1fc425c249c892, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -122,56 +108,39 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: speed
-      value: 7
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: deceleration
-      value: 1.79999995
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3811873816bd4b64eb1fc425c249c892,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
-      value: -2
+      propertyPath: m_LocalScale.y
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: -2
+      propertyPath: m_Radius
+      value: .330000013
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: Player
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: playerNum
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slimeType
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: slimeShotRange
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: slimeShotPrefab
-      value: 
-      objectReference: {fileID: 11494774, guid: f7869ffb852e0e44f926a7dd8a15e5b5,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: slimeShotScript
-      value: 
-      objectReference: {fileID: 11494774, guid: f7869ffb852e0e44f926a7dd8a15e5b5,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: slimeShotGameObject
-      value: 
-      objectReference: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
-    - target: {fileID: 0}
-      propertyPath: slimeShotDamage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: damage1Cooldown
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 172074}
+  m_RootGameObject: {fileID: 146074}
   m_IsPrefabParent: 1

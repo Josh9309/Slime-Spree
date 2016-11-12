@@ -11,44 +11,51 @@ public class SlimeShot : MonoBehaviour {
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
     private Rigidbody2D rBody;
+    private SpriteRenderer shotSR; //The slime shot's sprite renderer
     #endregion
+
     // Use this for initialization
-    void Start () {
+    void Awake ()
+    {
         switch (slimeType)
         {
             case PlayerSlime.SlimeType.BLUE:
-                player = GameObject.Find("BlueSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
+                player = GameObject.Find("BlueSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.RED:
-                player = GameObject.Find("RedSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
+                player = GameObject.Find("RedSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.GREEN:
-                player = GameObject.Find("GreenSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
+                player = GameObject.Find("GreenSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.YELLOW:
-                player = GameObject.Find("BlueSlime");
-                slimePlayerScript = player.GetComponent<PlayerSlime>();
+                player = GameObject.Find("BlueSlime(Clone)");
                 break;
         }
-        damage = slimePlayerScript.SlimeShotDamage;
-        slimeShotTarget = player.transform.Find("Reticle").position;
 
-        rBody = GetComponent<Rigidbody2D>();
-	}
+        slimePlayerScript = player.GetComponent<PlayerSlime>(); //Get the player's script
+        slimeShotTarget = slimePlayerScript.Reticle.transform.position; //The target of the slime shot
+        rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
+        shotSR = GetComponent<SpriteRenderer>(); //Get the slime shot's sprite renderer
+        shotSR.color = slimePlayerScript.PlayerSR.color; //Set the shot's color to be the same as the player's color
+
+        damage = slimePlayerScript.SlimeShotDamage;
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void Fire()
+	void Update ()
     {
-        //
+        rBody.velocity = transform.position + slimeShotTarget; //Add forces to shoot the slime shot
+    }
+
+    void OnTriggerEnter2D(Collider2D coll) //Collisions with the slime shot
+    {
+        if (coll.gameObject.tag == "Enemy") //If the slime is colliding with the enemy
+        {
+            Debug.Log("AWWWWW NO");
+        }
     }
 }

@@ -94,7 +94,8 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
-    [SerializeField] private GameObject slimeShotPrefab;
+    [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
+    [SerializeField] private float knockbackScale;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -134,6 +135,22 @@ public abstract class PlayerSlime : MonoBehaviour {
     public int SlimeShotDamage
     {
         get { return slimeShotDamage; }
+    }
+
+    public SpriteRenderer PlayerSR //PlayerSR property
+    {
+        get
+        {
+            return playerSR; //Return the player's sprite renderer
+        }
+    }
+
+    public GameObject Reticle //Reticle property
+    {
+        get
+        {
+            return reticle; //Return the reticle
+        }
     }
     #endregion
 
@@ -224,7 +241,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             if (input.fireLeftInput != 0 || input.fireRightInput != 0) //If the player is firing
             {
-                Debug.Log("The player is firing");
+                Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
             }
         }
         else //If the player is not aiming
@@ -257,5 +274,16 @@ public abstract class PlayerSlime : MonoBehaviour {
     protected void ScaleSlime()
     {
 
+    }
+
+    /// <summary>
+    /// detect if the player is colliding with anything
+    /// </summary>
+    public void OnTriggerEnter2D(Collider2D coll)
+    {
+        // knockback
+        //Vector3 moment = rBody.velocity + coll.GetComponent<Rigidbody2D>().velocity;
+        //Vector3 unitMoment = moment.normalized;
+        
     }
 }
