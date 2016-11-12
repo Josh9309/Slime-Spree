@@ -64,7 +64,6 @@ public class LevelManager : Singleton<LevelManager>
                                           Random.Range(5f, maxYSpawn) * Mathf.Ceil(Random.Range(-1, 2)),
                                           0);
 
-            Debug.Log(randPos);
 
             goalEnemies.Add((GameObject)Instantiate(goalEnemyPrefab, randPos, Quaternion.identity));
             goalEnemies[i].GetComponent<GoalEnemy>().target = GameObject.Find("Goal");
