@@ -2,7 +2,7 @@
 using System.Collections;
 
 public abstract class PlayerSlime : MonoBehaviour {
-    public enum SlimeType { RED, BLUE, YELLOW, GREEN};
+    public enum SlimeType { RED, BLUE, YELLOW, GREEN };
 
     #region InputSettings
     //this will setup the public inputSetting class
@@ -10,7 +10,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     public class InputSettings
     {
         public float delay = 0.3f; //delay for movement inputs
-        public float horizontalInput = 0, verticalInput = 0,  attack1Input = 0, attack2Input = 0; //sets up variables to hold inputs
+        public float horizontalInput = 0, verticalInput = 0, attack1Input = 0, attack2Input = 0; //sets up variables to hold inputs
         public string HORIZONTAL_AXIS, VERTICAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
 
@@ -65,18 +65,46 @@ public abstract class PlayerSlime : MonoBehaviour {
     #endregion
 
     #region Attributes
-    protected int health = 100;
+    [SerializeField] protected int health = 100;
+    [SerializeField] protected float speed = 10.0f;
+    [SerializeField] protected int playerNum = 1;
+    [SerializeField] protected int attack1Down;
+    [SerializeField] protected int slimeShotDamage;
+    [SerializeField] protected int slimeAttack2Damage;
+    [SerializeField] protected float slimeShotCooldown, slimeAttack2Cooldown;
+    [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
+    [SerializeField] protected float slimeShotRange;
     #endregion
 
     #region Properties
-    //get ste hp
-    int getHealth() { return health; }
-    void sethealth(int value) { health = value; }
+    //get set hp
+    public int Health
+    {
+        get { return health; }
+    }
 
     //get set slime type
-    SlimeType getSlimeType() { return slimerType; }
-    void setSlimeType(SlimeType value) { slimerType = value; }
+    public SlimeType getSlimeType {
+        get { return slimerType; }
+        set
+        {
+            slimerType = value;
+        }
+    }
+
+    public int PlayerNum
+    {
+        get { return playerNum; }
+        set
+        {
+            if (value < 1 || value > 4)
+            {
+                Debug.LogError("Tried to set playerNum to an invalid value");
+            }
+            else { playerNum = value; }
+        }
+    }
     #endregion
 
     // Use this for initialization
