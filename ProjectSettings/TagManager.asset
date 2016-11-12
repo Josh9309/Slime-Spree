@@ -6,7 +6,6 @@ TagManager:
   tags:
   - reticle
   - Goal
-  - Player
   layers:
   - Default
   - TransparentFX

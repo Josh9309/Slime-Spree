@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         //make players
+        players.Clear();
         players.Add((GameObject)Instantiate(Resources.Load("Prefabs/RedSlime", typeof(GameObject)), new Vector3(-2, 2, 0), Quaternion.identity));
         players.Add((GameObject)Instantiate(Resources.Load("Prefabs/BlueSlime", typeof(GameObject)), new Vector3(2, -2, 0), Quaternion.identity));
         players.Add((GameObject)Instantiate(Resources.Load("Prefabs/GreenSlime", typeof(GameObject)), new Vector3(2, 2, 0), Quaternion.identity));
