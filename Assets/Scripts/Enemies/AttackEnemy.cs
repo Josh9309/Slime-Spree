@@ -4,8 +4,6 @@ using System;
 
 public class AttackEnemy : Enemy {
 
-    [SerializeField] private float knockbackScale;
-
     // Use this for initialization
     protected override void Start () {
         base.Start();
@@ -19,7 +17,7 @@ public class AttackEnemy : Enemy {
     /// <summary>
     /// to check if the enemy is colliding with a player
     /// </summary>
-    public void OnCollisionEnter2D(Collision2D coll)
+    public override void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.transform.tag == "Player")
         {

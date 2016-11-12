@@ -5,11 +5,11 @@ public abstract class Enemy : MonoBehaviour {
 
 
     //-----ATTRIBUTES-----
+    [SerializeField] protected float knockbackScale;
     public float moveSpeed;
     public int health;
     public int damage;
     protected Rigidbody2D rb;
-    public float knockback;
     protected SpriteRenderer enemySprite;
     public GameObject target;
     public float maxSpeed;
@@ -76,6 +76,21 @@ public abstract class Enemy : MonoBehaviour {
         {
             Debug.Log("Enemy has died");
             Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// to check if the enemy is colliding with a player, or projectile
+    /// </summary>
+    public virtual void OnCollisionEnter2D(Collision2D coll)
+    {
+        // if enemies collide with a projectile decrement their health
+        // and destroy the prjectile
+        if (coll.transform.tag == "Projectile")
+        {
+            rb.AddForce(coll.transform.up * knockbackScale);
+
+            health--;
         }
     }
 }

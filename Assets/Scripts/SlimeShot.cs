@@ -10,7 +10,9 @@ public class SlimeShot : MonoBehaviour {
     private GameObject player;
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
+    [SerializeField] private float shotSpeed;
     private Rigidbody2D rBody;
+    private Vector3 shotDirection;
     #endregion
 
     // Use this for initialization
@@ -45,7 +47,9 @@ public class SlimeShot : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        rBody.AddForce((slimeShotTarget - transform.position) * 5); //Add forces to shoot the slime shot
+        shotDirection = (slimeShotTarget - transform.position).normalized;
+
+        rBody.AddForce(shotDirection * 10); //Add forces to shoot the slime shot
 
         if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
         {
