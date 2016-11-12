@@ -94,7 +94,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
-    [SerializeField] private GameObject SlimeShotPrefab;
+    [SerializeField] private GameObject slimeShotPrefab;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -211,11 +211,6 @@ public abstract class PlayerSlime : MonoBehaviour {
         //Debug.Log(rBody.velocity);
     }
 
-    protected virtual void SlimeShotAttack()
-    {
-
-    }
-
     protected virtual void Aim() //Aiming the slime's attack
     {
         if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
@@ -226,6 +221,11 @@ public abstract class PlayerSlime : MonoBehaviour {
             reticleSR.color = new Color(playerSR.color.r, playerSR.color.g, playerSR.color.b, 1); //Turn up the reticle's alpha
 
             reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
+
+            if (input.fireLeftInput != 0 || input.fireRightInput != 0) //If the player is firing
+            {
+                Debug.Log("The player is firing");
+            }
         }
         else //If the player is not aiming
         {
