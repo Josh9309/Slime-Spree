@@ -204,14 +204,17 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
         {
-            Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
+            float xLocation = Mathf.Cos(Mathf.Atan2(input.verticalAimAxis, input.horizontalAimAxis)) * slimeShotRange; //Set the reticle's x location
+            float yLocation = Mathf.Cos(Mathf.Atan2(input.horizontalAimAxis, input.verticalAimAxis)) * slimeShotRange; //Set the reticle's y location
+
             reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 1); //Turn up the reticle's alpha
-            reticle.transform.position = new Vector2(gameObject.transform.position.x + (input.horizontalAimAxis * slimeShotRange), gameObject.transform.position.y - (input.verticalAimAxis * slimeShotRange)); //Update the reticle's position
+
+            reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
         }
         else //If the player is not aiming
         {
-            Debug.Log("Ayy");
             reticleSR.color = new Color(reticleSR.color.r, reticleSR.color.g, reticleSR.color.b, 0); //Turn down the reticle's alpha
+
             reticle.transform.position = gameObject.transform.position; //Place the reticle at the player's position
         }
     }
