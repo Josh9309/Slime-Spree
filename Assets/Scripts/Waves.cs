@@ -7,6 +7,7 @@ public class Waves : MonoBehaviour {
     public int attackEnemies;
     public int goalEnemies;
     public int wave;
+    int numPlayers;
 
     //spawn types 
     // Use this for initialization
@@ -22,13 +23,15 @@ public class Waves : MonoBehaviour {
         attackEnemies = LevelManager.Instance.attackEnemies.Count;
         //get number of goal enemies
         goalEnemies = LevelManager.Instance.goalEnemies.Count;
+        //check number of players
+        numPlayers = GameManager.Instance.players.Count;
         //if no enemies left
         if (attackEnemies <= 0 && goalEnemies <= 0)
         {
             //go to the next wave
             wave += 1;
-            attackEnemies = wave * 5;
-            goalEnemies = wave * 3;
+            attackEnemies = (wave * numPlayers) + 5;
+            goalEnemies = (wave * numPlayers) + 2 ;
             LevelManager.Instance.SpawnEnemies(attackEnemies, goalEnemies);
         }
 
