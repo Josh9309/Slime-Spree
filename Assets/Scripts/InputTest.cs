@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputTest : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public class InputTest : MonoBehaviour
+{
+	void Start() //Use this for initialization
+    {
 	
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+	void Update() //Update is called once per frame
     {
 	    if(Input.GetAxis("FireLeft") > 0.0f)
         {
@@ -19,9 +18,10 @@ public class InputTest : MonoBehaviour {
         {
             Debug.Log("Pew Right");
         }
-        if (Input.GetAxis("Aim") != 0.0f)
+        if (Input.GetAxis("HorizontalAim") != 0.0f || Input.GetAxis("VerticalAim") != 0.0f) //If the player is aiming
         {
-            Debug.Log(Input.GetAxis("Aim"));
+            Debug.Log(Input.GetAxis("HorizontalAim") + Input.GetAxis("VerticalAim"));
+            //Instantiate();
         }
         if (Input.GetButtonDown("Trap"))
         {

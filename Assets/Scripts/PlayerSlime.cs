@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class PlayerSlime : MonoBehaviour {
-    public enum SlimeType { RED, BLUE, YELLOW, GREEN};
+    public enum SlimeType { RED, BLUE, YELLOW, GREEN };
 
     #region InputSettings
     //this will setup the public inputSetting class
@@ -10,13 +11,13 @@ public abstract class PlayerSlime : MonoBehaviour {
     public class InputSettings
     {
         public float delay = 0.3f; //delay for movement inputs
-        public float horizontalInput = 0, verticalInput = 0,  attack1Input = 0, attack2Input = 0; //sets up variables to hold inputs
-        public string HORIZONTAL_AXIS, VERTICAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS; //sets up variable to hold input_axis
+        public float horizontalInput = 0, verticalInput = 0, fireLeftInput = 0, fireRightInput = 0, horizontalAimAxis = 0, verticalAimAxis = 0; //sets up variables to hold inputs
+        public string HORIZONTAL_AXIS, VERTICAL_AXIS, FIRELEFT_AXIS, FIRERIGHT_AXIS, HORIZONTAL_AIM_AXIS, VERTICAL_AIM_AXIS, TRAP_AXIS, ULTIMATE_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
 
         //sets up booleans for btn_input and sets them to false
-        public bool attack1 = false;
-        public bool attack2 = false;
+        public bool trap = false;
+        public bool ultimate = false;
         public bool pause = false;
 
         public void ConfigureInput(int playerNum)
@@ -27,29 +28,45 @@ public abstract class PlayerSlime : MonoBehaviour {
                 case 1:
                     HORIZONTAL_AXIS = "P1_Horizontal";
                     VERTICAL_AXIS = "P1_Vertical";
-                    ATTACK1_AXIS = "P1_Attack1";
-                    ATTACK2_AXIS = "P1_Attack2";
+                    FIRELEFT_AXIS = "P1_FireLeft";
+                    FIRERIGHT_AXIS = "P1_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P1_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P1_VerticalAim";
+                    TRAP_AXIS = "P1_Trap";
+                    ULTIMATE_AXIS = "P1_Ultimate";
                     break;
 
                 case 2:
                     HORIZONTAL_AXIS = "P2_Horizontal";
                     VERTICAL_AXIS = "P2_Vertical";
-                    ATTACK1_AXIS = "P2_Attack1";
-                    ATTACK2_AXIS = "P2_Attack2";
+                    FIRELEFT_AXIS = "P2_FireLeft";
+                    FIRERIGHT_AXIS = "P2_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P2_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P2_VerticalAim";
+                    TRAP_AXIS = "P2_Trap";
+                    ULTIMATE_AXIS = "P2_Ultimate";
                     break;
 
                 case 3:
                     HORIZONTAL_AXIS = "P3_Horizontal";
                     VERTICAL_AXIS = "P3_Vertical";
-                    ATTACK1_AXIS = "P3_Attack1";
-                    ATTACK2_AXIS = "P3_Attack2";
+                    FIRELEFT_AXIS = "P3_FireLeft";
+                    FIRERIGHT_AXIS = "P3_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P3_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P3_VerticalAim";
+                    TRAP_AXIS = "P3_Trap";
+                    ULTIMATE_AXIS = "P3_Ultimate";
                     break;
 
                 case 4:
                     HORIZONTAL_AXIS = "P4_Horizontal";
                     VERTICAL_AXIS = "P4_Vertical";
-                    ATTACK1_AXIS = "P4_Attack1";
-                    ATTACK2_AXIS = "P4_Attack2";
+                    FIRELEFT_AXIS = "P4_FireLeft";
+                    FIRERIGHT_AXIS = "P4_FireRight";
+                    HORIZONTAL_AIM_AXIS = "P4_HorizontalAim";
+                    VERTICAL_AIM_AXIS = "P4_VerticalAim";
+                    TRAP_AXIS = "P4_Trap";
+                    ULTIMATE_AXIS = "P4_Ultimate";
                     break;
             }
         }
@@ -57,44 +74,163 @@ public abstract class PlayerSlime : MonoBehaviour {
         public void ResetBtns()
         {
             //resets booleans for btn_input to false
-            attack1 = false;
-            attack2 = false;
+            trap = false;
+            ultimate = false;
             pause = false;
         }
     }
     #endregion
 
     #region Attributes
-    protected int health = 100;
+    [SerializeField] protected int health = 100;
+    [SerializeField] protected float speed = 10.0f;
+    [SerializeField] protected int playerNum = 1;
+    [SerializeField] protected int attack1Down;
+    [SerializeField] protected int slimeShotDamage;
+    [SerializeField] protected int slimeAttack2Damage;
+    [SerializeField] protected float slimeShotCooldown, slimeAttack2Cooldown;
+    [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
+    [SerializeField] protected float slimeShotRange;
+    [SerializeField] private GameObject reticleSprite; //The reticle sprite
+    private Rigidbody2D rBody;
+    private InputSettings input = new InputSettings();
     #endregion
 
     #region Properties
-    //get ste hp
-    int getHealth() { return health; }
-    void sethealth(int value) { health = value; }
+    //get set hp
+    public int Health
+    {
+        get { return health; }
+    }
 
     //get set slime type
-    SlimeType getSlimeType() { return slimerType; }
-    void setSlimeType(SlimeType value) { slimerType = value; }
+    public SlimeType getSlimeType {
+        get { return slimerType; }
+        set
+        {
+            slimerType = value;
+        }
+    }
+
+    public int PlayerNum
+    {
+        get { return playerNum; }
+        set
+        {
+            if (value < 1 || value > 4)
+            {
+                Debug.LogError("Tried to set playerNum to an invalid value");
+            }
+            else { playerNum = value; }
+        }
+    }
     #endregion
 
     // Use this for initialization
-    void Start () {
+    protected void Start()
+    {
+        //Assign body
+        rBody = GetComponent<Rigidbody2D>();
+
+        //turn off gravity on our rigidbody
+        rBody.gravityScale = 0;
+
+        //configure InputManager
+        input.ConfigureInput(playerNum);
+
+        Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+    }
 	
+	//Update is called once per frame
+	protected void Update()
+    {
+        Aim(); //Aim
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-	
+	void FixedUpdate ()
+    {
+        GetInput();
+        Move();
 	}
+
+    protected void GetInput()
+    {
+        //gets all value based input checks
+        input.horizontalInput = Input.GetAxis(input.HORIZONTAL_AXIS);
+        input.verticalInput = Input.GetAxis(input.VERTICAL_AXIS);
+        input.fireLeftInput = Input.GetAxis(input.FIRELEFT_AXIS);
+        input.fireRightInput = Input.GetAxis(input.FIRERIGHT_AXIS);
+        input.horizontalAimAxis = Input.GetAxisRaw(input.HORIZONTAL_AIM_AXIS);
+        input.verticalAimAxis = Input.GetAxisRaw(input.VERTICAL_AIM_AXIS);
+
+        //button input checks
+        if (!input.trap)
+        {
+            input.trap = Input.GetButtonDown(input.TRAP_AXIS);
+        }
+        if (!input.ultimate)
+        {
+            input.ultimate = Input.GetButtonDown(input.ULTIMATE_AXIS);
+        }
+        if (!input.pause)
+        {
+            input.pause = Input.GetButtonDown(input.PAUSE_AXIS);
+        }
+    }
+
+    protected void Move()
+    {
+        if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
+        {
+            rBody.velocity = new Vector2(input.horizontalInput * speed, input.verticalInput * speed);
+        }
+        else
+        {
+            rBody.velocity = Vector2.zero;
+        }
+    }
 
     protected virtual void SlimeShotAttack()
     {
 
     }
 
+    protected virtual void Aim() //Aiming the slime's attack
+    {
+        if (input.horizontalAimAxis != 0.0f || input.verticalAimAxis != 0.0f) //If the player is aiming
+        {
+            Debug.Log(new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange));
+            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + input.horizontalAimAxis) * slimeShotRange, (gameObject.transform.position.y - input.verticalAimAxis) * slimeShotRange); //Update the reticle's position
+        }
+        else //If the player is not aiming
+        {
+            reticleSprite.transform.position = gameObject.transform.position; //Place the reticle at the player's position
+        }
+    }
+
     protected abstract void SlimeAttack2();
 
-    protected abstract void SlimeTrap();
+    protected abstract void SlimeUltimate();
+
+    protected virtual void SlimeShotCooldown()
+    {
+
+    }
+
+    protected abstract void SlimeAttack2Cooldown();
+
+    protected abstract void SlimeUltimateCooldown();
+
+    protected void ModHealth(int mod)
+    {
+        health += mod; //modifies the health 
+        ScaleSlime(); //rescales the playerSlime
+    }
+
+    protected void ScaleSlime()
+    {
+
+    }
 }

@@ -9,7 +9,13 @@ public class LevelManager : Singleton<LevelManager>
 {
 	#region Fields
 	public List<GameObject> levels = new List<GameObject>();
+    public List<GameObject> goalEnemies = new List<GameObject>();
+    public GameObject goalEnemyPrefab;
     private int level = 0;
+    private float maxXSpawn = 11;
+    private float minXSpawn = 10;
+    private float minYSpawn = 10;
+    private float maxYSpawn = 7;
 	#endregion
 
 	#region Properties
@@ -41,5 +47,27 @@ public class LevelManager : Singleton<LevelManager>
 
         //set the new current level active
         levels[level].SetActive(true);
+    }
+
+    /// <summary>
+    /// spawns all enemies in the current wave
+    /// should be called at the end of each wave
+    /// i.e when all enemies in the previous wave
+    /// are killed
+    /// </summary>
+    public void SpawnEnemies()
+    {
+        // assign each goalEnemy to the goalEnemy list
+        // start by making 2 goalEnemies in random positions
+        for (int i = 0; i < 10; i++)
+        {
+            // calculate a random position around the centroid, assign each enemy a random pos
+            Vector3 randPos = new Vector3(Random.Range(8.5f, maxXSpawn) * Mathf.Ceil(Random.Range(-1, 1)),
+                                          Random.Range(5f, maxYSpawn) * Mathf.Ceil(Random.Range(-1, 1)),
+                                          0);
+
+            goalEnemies.Add((GameObject)Instantiate(goalEnemyPrefab, randPos, Quaternion.identity));
+            goalEnemies[i].GetComponent<GoalEnemy>().target = GameObject.Find("Goal");
+        }
     }
 }

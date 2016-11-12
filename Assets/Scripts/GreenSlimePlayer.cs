@@ -2,19 +2,16 @@
 using System.Collections;
 using System;
 
-public class RedSlimePlayer : PlayerSlime {
-    
+public class GreenSlimePlayer : PlayerSlime {
 
     // Use this for initialization
-    new void Start()
-    {
-        base.Start(); //Call the base start method
+    void Start () {
+	
 	}
 	
 	// Update is called once per frame
-	new void Update()
-    {
-        base.Update(); //Call the base update method
+	void Update () {
+	
 	}
 
     protected override void SlimeAttack2()
