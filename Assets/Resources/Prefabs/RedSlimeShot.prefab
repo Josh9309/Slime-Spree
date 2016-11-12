@@ -13,7 +13,7 @@ GameObject:
   - 50: {fileID: 5009350}
   - 114: {fileID: 11494774}
   m_Layer: 0
-  m_Name: SlimeShot
+  m_Name: RedSlimeShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

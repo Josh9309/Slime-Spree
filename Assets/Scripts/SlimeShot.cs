@@ -20,35 +20,35 @@ public class SlimeShot : MonoBehaviour {
         switch (slimeType)
         {
             case PlayerSlime.SlimeType.BLUE:
-                player = GameObject.Find("BlueSlime");
+                player = GameObject.Find("BlueSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.RED:
-                player = GameObject.Find("RedSlime");
+                player = GameObject.Find("RedSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.GREEN:
-                player = GameObject.Find("GreenSlime");
+                player = GameObject.Find("GreenSlime(Clone)");
                 break;
 
             case PlayerSlime.SlimeType.YELLOW:
-                player = GameObject.Find("BlueSlime");
+                player = GameObject.Find("BlueSlime(Clone)");
                 break;
         }
-        damage = slimePlayerScript.SlimeShotDamage;
-        //slimeShotTarget = player.transform.Find("Reticle").transform.position;
 
-        rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
         slimePlayerScript = player.GetComponent<PlayerSlime>(); //Get the player's script
+        slimeShotTarget = slimePlayerScript.Reticle.transform.position; //The target of the slime shot
+        rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
         shotSR = GetComponent<SpriteRenderer>(); //Get the slime shot's sprite renderer
         shotSR.color = slimePlayerScript.PlayerSR.color; //Set the shot's color to be the same as the player's color
+
+        damage = slimePlayerScript.SlimeShotDamage;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(slimeShotTarget);
-        rBody.velocity = transform.position - player.GetComponentInChildren<GameObject>().transform.position; //Add forces to shoot the slime shot
+        rBody.velocity = transform.position + slimeShotTarget; //Add forces to shoot the slime shot
     }
 
     void OnTriggerEnter2D(Collider2D coll) //Collisions with the slime shot

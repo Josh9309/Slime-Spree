@@ -143,6 +143,14 @@ public abstract class PlayerSlime : MonoBehaviour {
             return playerSR; //Return the player's sprite renderer
         }
     }
+
+    public GameObject Reticle //Reticle property
+    {
+        get
+        {
+            return reticle; //Return the reticle
+        }
+    }
     #endregion
 
     // Use this for initialization
