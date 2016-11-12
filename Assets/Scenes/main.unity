@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 496470, guid: 5ef2d38448276394fb2ad4c439f90686, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11470284, guid: 5ef2d38448276394fb2ad4c439f90686, type: 2}
       propertyPath: Goal
@@ -168,7 +168,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 489220, guid: 70b61c6c83ad2854f8a5f1fbb24cef1c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11488218, guid: 70b61c6c83ad2854f8a5f1fbb24cef1c, type: 2}
       propertyPath: attackEnemyPrefab
