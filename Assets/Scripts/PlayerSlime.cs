@@ -76,6 +76,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
+    [SerializeField] private GameObject reticleSprite; //The reticle sprite
     private Rigidbody2D body;
     #endregion
 
@@ -110,23 +111,38 @@ public abstract class PlayerSlime : MonoBehaviour {
     #endregion
 
     // Use this for initialization
-    void Start () {
+    protected void Start()
+    {
         //Assign body
         body = GetComponent<Rigidbody2D>();
 
         //turn off gravity on our rigidbody
         body.gravityScale = 0;
 
+        Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
     }
 	
-	// Update is called once per frame
-	void Update () {
-	
+	//Update is called once per frame
+	protected void Update()
+    {
+        Aim(); //Aim
 	}
 
-    protected virtual void SlimeShotAttack()
+    protected virtual void SlimeShotAttack() //The slime's shooting attack
     {
 
+    }
+
+    protected virtual void Aim() //Aiming the slime's attack
+    {
+        if (Input.GetAxisRaw("HorizontalAim") != 0.0f || Input.GetAxisRaw("VerticalAim") != 0.0f) //If the player is aiming
+        {
+            reticleSprite.transform.position = new Vector2((gameObject.transform.position.x + Input.GetAxisRaw("HorizontalAim")) * slimeShotRange, (gameObject.transform.position.y - Input.GetAxisRaw("VerticalAim")) * slimeShotRange); //Update the reticle's position
+        }
+        else //If the player is not aiming
+        {
+            reticleSprite.transform.position = gameObject.transform.position; //Place the reticle at the player's position
+        }
     }
 
     protected abstract void SlimeAttack2();
