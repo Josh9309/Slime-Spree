@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 184850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.949999988, y: 2.11999989, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4000001, y: 2.4000001, z: 2.4000001}
   m_Children:
   - {fileID: 481758}
   - {fileID: 479066}
@@ -153,14 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece2f7392b96fcb4eb03c0fbe6db764c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackScale: 300
   moveSpeed: 9
   health: 2
   damage: 2
-  knockback: 2
   target: {fileID: 0}
   maxSpeed: 3
   slimeType: 1
-  knockbackScale: 300
 --- !u!212 &21216546
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -239,6 +238,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: slimeType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 2.4000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 2.4000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 2.4000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
