@@ -196,14 +196,14 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
         {
-            rBody.AddForce(new Vector2(input.horizontalInput * speed, -input.verticalInput * speed));
+            rBody.AddForce(new Vector2(input.horizontalInput * 20, -input.verticalInput * 20));
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
         }
         else
         {
-            rBody.AddForce(new Vector2(-rBody.velocity.x / deceleration, -rBody.velocity.y /deceleration));
+            rBody.AddForce(new Vector2(-rBody.velocity.x * deceleration, -rBody.velocity.y * deceleration));
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
