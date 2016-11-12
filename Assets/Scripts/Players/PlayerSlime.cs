@@ -100,6 +100,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
+    private Vector3 fullScale;
     protected InputSettings input = new InputSettings();
     #endregion
 
@@ -161,6 +162,9 @@ public abstract class PlayerSlime : MonoBehaviour {
         reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
         reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
         playerSR = GetComponent<SpriteRenderer>(); //Get the player's sprite renderer
+
+        //save fullscale
+        fullScale = transform.localScale;
     }
 	
 	//Update is called once per frame
@@ -175,6 +179,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         GetInput();
         Move();
+        ScaleSlime();
 	}
 
     protected void GetInput()
@@ -269,8 +274,12 @@ public abstract class PlayerSlime : MonoBehaviour {
     }
 
     protected void ScaleSlime()
-    {
+    {//min size is 1 as scale, max is 3.58, range between is 2.58:: 1 hp = .0258 scale
 
+        //make scale be that percent
+        float scaled = 1.0000f + (.0258f * health);
+        transform.localScale = new Vector3(scaled, scaled, 1);
+      
     }
 
     /// <summary>
