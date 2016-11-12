@@ -95,7 +95,6 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
     [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
-    [SerializeField] private float knockbackScale;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer

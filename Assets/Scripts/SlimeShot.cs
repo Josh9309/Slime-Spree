@@ -11,6 +11,7 @@ public class SlimeShot : MonoBehaviour {
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
     [SerializeField] private float shotSpeed;
+    [SerializeField] private float knockbackScale;
     private Rigidbody2D rBody;
     private Vector3 shotDirection;
     #endregion
@@ -64,6 +65,13 @@ public class SlimeShot : MonoBehaviour {
             Enemy enemySlime = coll.gameObject.GetComponent<Enemy>();
             enemySlime.health -= damage;
             Destroy(this.gameObject); //Destroy the slime shot
+
+            // apply knockback
+            coll.transform.GetComponent<Rigidbody2D>().AddForce(shotDirection * knockbackScale);
         }
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

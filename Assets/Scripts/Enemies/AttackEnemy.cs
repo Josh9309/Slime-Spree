@@ -28,9 +28,5 @@ public class AttackEnemy : Enemy {
             coll.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * knockbackScale);
             coll.transform.GetComponent<PlayerSlime>().Health -= damage;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 }
