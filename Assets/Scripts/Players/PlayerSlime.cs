@@ -84,6 +84,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     #region Attributes
     [SerializeField] protected int health = 100;
     [SerializeField] protected float speed = 10.0f;
+    [SerializeField] private float deceleration = 1.5f;
     [SerializeField] protected int playerNum = 1;
     [SerializeField] protected int attack1Down;
     [SerializeField] protected int slimeShotDamage;
@@ -93,6 +94,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
+    [SerializeField] private GameObject SlimeShotPrefab;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
@@ -126,6 +128,11 @@ public abstract class PlayerSlime : MonoBehaviour {
             }
             else { playerNum = value; }
         }
+    }
+
+    public int SlimeShotDamage
+    {
+        get { return slimeShotDamage; }
     }
     #endregion
 
@@ -187,12 +194,19 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         if(Mathf.Abs(input.horizontalInput) > input.delay || Mathf.Abs(input.verticalInput) > input.delay)
         {
-            rBody.velocity = new Vector2(input.horizontalInput * speed, -input.verticalInput * speed);
+            rBody.AddForce(new Vector2(input.horizontalInput * speed, -input.verticalInput * speed));
+            float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
+            float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
+            rBody.velocity = new Vector2(velx, vely);
         }
         else
         {
-            rBody.velocity = Vector2.zero;
+            rBody.AddForce(new Vector2(-rBody.velocity.x / deceleration, -rBody.velocity.y /deceleration));
+            float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
+            float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
+            rBody.velocity = new Vector2(velx, vely);
         }
+        Debug.Log(rBody.velocity);
     }
 
     protected virtual void SlimeShotAttack()

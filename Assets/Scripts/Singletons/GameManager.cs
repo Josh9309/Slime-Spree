@@ -10,7 +10,8 @@ public class GameManager : Singleton<GameManager>
 {
     #region Fields
     //Assigned in inspector
-    public List<PlayerSlime> players = new List<PlayerSlime>();
+    public List<GameObject> players = new List<GameObject>();
+    public GameObject Goal;
     #endregion
 
     #region Properties
@@ -20,6 +21,18 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        //make players
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/RedSlime", typeof(GameObject)), new Vector3(-2, 2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/BlueSlime", typeof(GameObject)), new Vector3(2, -2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/GreenSlime", typeof(GameObject)), new Vector3(2, 2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/YellowSlime", typeof(GameObject)), new Vector3(-2, -2, 0), Quaternion.identity));
+
+
+
+        //set goal
+        Goal = (GameObject)Instantiate(Goal, new Vector3(0, 0, 0), Quaternion.identity);
+
+        //start game
         StartGame();
     }
 
