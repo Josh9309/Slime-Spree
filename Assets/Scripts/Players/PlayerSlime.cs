@@ -229,7 +229,6 @@ public abstract class PlayerSlime : MonoBehaviour {
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
-            //transform.up = rBody.velocity;
         }
         //Debug.Log(rBody.velocity);
     }

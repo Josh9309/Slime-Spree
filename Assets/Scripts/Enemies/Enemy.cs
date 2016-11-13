@@ -79,14 +79,14 @@ public abstract class Enemy : MonoBehaviour {
 
     private void CheckIsAlive()
     {
-        if( health <= 0)
+        if( health <= 0) //If the enemy has no health
         {
             if(50 >= Random.Range(0, 101)) //If the enemy should drop health
             {
                 Instantiate(healthDrop, transform.position, Quaternion.identity); //Drop health
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject); //This kills the enemy
         }
     }
 

@@ -161,7 +161,7 @@ MonoBehaviour:
   target: {fileID: 0}
   maxSpeed: 3
   slimeType: 1
-  healthDrop: {fileID: 0}
+  healthDrop: {fileID: 148504, guid: a588bd35cc31e0a45927ff3df85dca7c, type: 2}
 --- !u!212 &21214772
 SpriteRenderer:
   m_ObjectHideFlags: 1
