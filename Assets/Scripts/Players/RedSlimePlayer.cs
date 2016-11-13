@@ -21,16 +21,22 @@ public class RedSlimePlayer : PlayerSlime {
 	new void Update()
     {
         base.Update(); //Call the base update method
-        SlimeAttack2();
+        SlimeUltimate();
         input.ResetBtns();
 	}
 
-    //Red Slime SlimeBurst AOE Attack
+    
     protected override void SlimeAttack2()
     {
-        if (input.trap && health > 20 && slimeAttack2Available)
+        throw new NotImplementedException();
+    }
+
+    //Red Slime SlimeBurst AOE Attack
+    protected override void SlimeUltimate()
+    {
+        if (input.ultimate && health > SlimeBurstCost && slimeUltimateAvailable)
         {
-            
+
             slimeBurstAnim.Play("SlimeBurst");
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
             Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
@@ -50,13 +56,9 @@ public class RedSlimePlayer : PlayerSlime {
             }
 
             ModHealth(-SlimeBurstCost); //decrease players health by the cost of the attack
-            StartCoroutine(SlimeAttack2Cooldown());
+            StartCoroutine(SlimeUltimateCooldown());
         }
-    }
-
-    protected override void SlimeUltimate()
-    {
-        throw new NotImplementedException();
+        
     }
 
 }
