@@ -293,9 +293,8 @@ public abstract class PlayerSlime : MonoBehaviour {
     protected virtual IEnumerator SlimeUltimateCooldown()
     {
         slimeUltimateAvailable = false;
-        Debug.Log("Ultimate unvailable");
+
         yield return new WaitForSeconds(slimeUltimateCooldown);
-        Debug.Log("Ultimate Availble");
         slimeUltimateAvailable = true;
     }
 

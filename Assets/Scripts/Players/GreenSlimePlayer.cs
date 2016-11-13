@@ -69,12 +69,20 @@ public class GreenSlimePlayer : PlayerSlime
         if (coll.gameObject.name.Contains("GoalEnemy(Clone)") && glutton) //If the player collides with an enemy and is not glutton
         {
             health += 11; //Regain 10 health
-            Destroy(coll.gameObject); //Destroy the enemy
+
+            if (LevelManager.Instance.goalEnemies.Remove(coll.gameObject)) //Remove the gameobject from the list
+            {
+                Destroy(coll.gameObject); //This kills the enemy
+            }
         }
         if (coll.gameObject.name.Contains("AttackEnemy(Clone)") && glutton) //If the player collides with an enemy and is not glutton
         {
             health += 12; //Regain 10 health
-            Destroy(coll.gameObject); //Destroy the enemy
+
+            if (LevelManager.Instance.attackEnemies.Remove(coll.gameObject)) //Remove the gameobject from the list
+            {
+                Destroy(coll.gameObject); //This kills the enemy
+            }
         }
     }
 }

@@ -29,6 +29,22 @@ public class LevelManager : Singleton<LevelManager>
 		
 	}
 
+    void Update()
+    {
+        //foreach (GameObject g in goalEnemies)
+        //{
+        //    if (g.transform.name.Contains("Missing"))
+        //    {
+        //        Debug.Log("AGEasgsg");
+        //        goalEnemies.Remove(g); //Remove the gameobject from the list
+        //    }
+        //}
+        //if (goalEnemies.Contains((GameObject)"Missing") && gameObject.name.Contains("Missing"))
+        //{
+        //    
+        //}
+    }
+
     /// <summary>
     /// starts round, and moves us to the next level
     /// </summary>

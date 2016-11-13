@@ -21,13 +21,14 @@ public class Waves : MonoBehaviour {
 	void Update ()
     {
         //get number of attack enemies
-        attackEnemies = LevelManager.Instance.attackEnemies.Count;
+        //attackEnemies = LevelManager.Instance.attackEnemies.Count;
         //get number of goal enemies
         goalEnemies = LevelManager.Instance.goalEnemies.Count;
         //check number of players
         numPlayers = GameManager.Instance.players.Count;
+
         //if no enemies left
-        if (attackEnemies <= 0 && goalEnemies <= 0)
+        if (goalEnemies <= 0)
         {
             //go to the next wave
             wave += 1;

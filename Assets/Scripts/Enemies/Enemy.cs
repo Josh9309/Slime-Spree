@@ -62,7 +62,7 @@ public abstract class Enemy : MonoBehaviour {
     {
         if (target == null)
         {
-            target = GameObject.FindGameObjectWithTag("Goal");
+            target = GameObject.FindGameObjectWithTag("Player");
         }
         if (frozen)
         {
@@ -141,16 +141,30 @@ public abstract class Enemy : MonoBehaviour {
 
         Destroy(slimeshot);
     }
+
     private void CheckIsAlive()
     {
         if( health <= 0) //If the enemy has no health
         {
-            if(50 >= UnityEngine.Random.Range(0, 101)) //If the enemy should drop health
+            if(75 >= UnityEngine.Random.Range(0, 101)) //If the enemy should drop health
             {
                 Instantiate(healthDrop, transform.position, Quaternion.identity); //Drop health
             }
 
-            Destroy(gameObject); //This kills the enemy
+            if (name.Contains("Attack")) //If attack enemy
+            {
+                if (LevelManager.Instance.attackEnemies.Remove(gameObject)) //Remove the gameobject from the list
+                {
+                    Destroy(gameObject); //This kills the enemy
+                }
+            }
+            else if (name.Contains("Goal")) //If goal enemy
+            {
+                if (LevelManager.Instance.goalEnemies.Remove(gameObject)) //Remove the gameobject from the list
+                {
+                    Destroy(gameObject); //This kills the enemy
+                }
+            }
         }
     }
 

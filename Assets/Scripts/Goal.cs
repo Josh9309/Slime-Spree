@@ -36,8 +36,14 @@ public class Goal : MonoBehaviour {
             // decrement health by amount of damage that enemy does
             health -= coll.transform.GetComponent<Enemy>().Damage;
 
-            // delete enemy that runs into it
-            Destroy(coll.gameObject);
+            if (transform.name.Contains("Goal")) //If goal enemy
+            {
+                if (LevelManager.Instance.goalEnemies.Remove(coll.gameObject)) //Remove the gameobject from the list
+                {
+                    // delete enemy that runs into it
+                    Destroy(coll.gameObject);
+                }
+            }
         }
     }
 
