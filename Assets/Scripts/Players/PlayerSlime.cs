@@ -95,7 +95,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] private float knockbackScale;
     protected bool slimeAttack2Available = true;
     protected bool slimeUltimateAvailable = true;
-    protected GameObject reticle; //The reticle
+    private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
@@ -144,6 +144,16 @@ public abstract class PlayerSlime : MonoBehaviour {
         {
             return reticle; //Return the reticle
         }
+    }
+
+    public int SlimeAttack2Damage
+    {
+        get { return slimeAttack2Damage; }
+    }
+
+    public int SlimeUltimateDamage
+    {
+        get { return slimeUltimateDamage; }
     }
     #endregion
 
@@ -282,8 +292,9 @@ public abstract class PlayerSlime : MonoBehaviour {
     protected virtual IEnumerator SlimeUltimateCooldown()
     {
         slimeUltimateAvailable = false;
-
+        Debug.Log("Ultimate unvailable");
         yield return new WaitForSeconds(slimeUltimateCooldown);
+        Debug.Log("Ultimate Availble");
         slimeUltimateAvailable = true;
     }
 
