@@ -87,7 +87,6 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected int slimeShotDamage;
     [SerializeField] protected int slimeAttack2Damage, slimeUltimateDamage;
     [SerializeField] protected float slimeShotCooldown, slimeAttack2Cooldown, slimeUltimateCooldown;
-    [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
@@ -257,12 +256,12 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
 
-            if (input.fireRightInput != 0 && damage1Cooldown <= 0.0f) //If the player is firing
+            if (input.fireRightInput != 0 && slimeShotCooldown <= 0.0f) //If the player is firing
             {
-                SoundManager.instance.RandomizeSFx(shoot, shoot2);
+                //SoundManager.instance.RandomizeSFx(shoot, shoot2);
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
                 health--; //Decrement the player's health
-                damage1Cooldown = 0.65f; //Set the damage cooldown
+                slimeShotCooldown = 0.65f; //Set the damage cooldown
             }
         }
         else //If the player is not aiming
@@ -279,9 +278,9 @@ public abstract class PlayerSlime : MonoBehaviour {
 
     protected virtual void SlimeShotCooldown()
     {
-        if (damage1Cooldown > 0) //If the slime shot has been activated
+        if (slimeShotCooldown > 0) //If the slime shot has been activated
         {
-            damage1Cooldown -= Time.deltaTime; //Decrement the cooldown
+            slimeShotCooldown -= Time.deltaTime; //Decrement the cooldown
         }
     }
 

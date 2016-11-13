@@ -134,6 +134,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11492660, guid: 0763bf1267a9fc744861d3d0037aae45, type: 2}
+      propertyPath: slimeUltimateCooldown
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0763bf1267a9fc744861d3d0037aae45, type: 2}
   m_IsPrefabParent: 0
