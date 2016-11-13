@@ -74,23 +74,24 @@ MonoBehaviour:
   health: 100
   speed: 7
   deceleration: 1.79999995
-  playerNum: 4
+  playerNum: 1
   attack1Down: 0
   slimeShotDamage: 1
-  slimeAttack2Damage: 0
+  slimeAttack2Damage: 5
   slimeUltimateDamage: 10
   slimeShotCooldown: 0
-  slimeAttack2Cooldown: 0
-  slimeUltimateCooldown: 0
+  slimeAttack2Cooldown: 5
+  slimeUltimateCooldown: 15
   slimerType: 2
   slimeShotRange: 12
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
   slimeShotGameObject: {fileID: 146074, guid: 4eeb632350ce5144cb27900438654081, type: 2}
   knockbackScale: 0
-  shoot: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
-  shoot2: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
   slimeWallCost: 20
   slimeLightingPrefab: {fileID: 103876, guid: 96602f6e4e19569439cd2939556ed6ec, type: 2}
+  electricShotObject: {fileID: 135864, guid: 5ea13bb10bbfeaa44b79967bd63546e9, type: 2}
+  yellowLightning: {fileID: 0}
+  yellowLightning2: {fileID: 0}
 --- !u!212 &21290164
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -197,6 +198,14 @@ Prefab:
       propertyPath: shoot2
       value: 
       objectReference: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
+    - target: {fileID: 0}
+      propertyPath: slimeAttack2Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slimeUltimateCooldown
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 186942}
