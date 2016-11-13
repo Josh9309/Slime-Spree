@@ -11,12 +11,11 @@ public abstract class PlayerSlime : MonoBehaviour {
     public class InputSettings
     {
         public float delay = 0.3f; //delay for movement inputs
-        public float horizontalInput = 0, verticalInput = 0, fireLeftInput = 0, fireRightInput = 0, horizontalAimAxis = 0, verticalAimAxis = 0; //sets up variables to hold inputs
-        public string HORIZONTAL_AXIS, VERTICAL_AXIS, FIRELEFT_AXIS, FIRERIGHT_AXIS, HORIZONTAL_AIM_AXIS, VERTICAL_AIM_AXIS, TRAP_AXIS, ULTIMATE_AXIS; //sets up variable to hold input_axis
+        public float horizontalInput = 0, verticalInput = 0, special = 0, fireRightInput = 0, horizontalAimAxis = 0, verticalAimAxis = 0; //sets up variables to hold inputs
+        public string HORIZONTAL_AXIS, VERTICAL_AXIS, SPECIAL_AXIS, FIRERIGHT_AXIS, HORIZONTAL_AIM_AXIS, VERTICAL_AIM_AXIS, TRAP_AXIS, ULTIMATE_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
 
         //sets up booleans for btn_input and sets them to false
-        public bool trap = false;
         public bool ultimate = false;
         public bool pause = false;
 
@@ -28,18 +27,17 @@ public abstract class PlayerSlime : MonoBehaviour {
                 case 1:
                     HORIZONTAL_AXIS = "P1_Horizontal";
                     VERTICAL_AXIS = "P1_Vertical";
-                    FIRELEFT_AXIS = "P1_FireLeft";
+                    SPECIAL_AXIS = "P1_Special";
                     FIRERIGHT_AXIS = "P1_FireRight";
                     HORIZONTAL_AIM_AXIS = "P1_HorizontalAim";
                     VERTICAL_AIM_AXIS = "P1_VerticalAim";
-                    TRAP_AXIS = "P1_Trap";
                     ULTIMATE_AXIS = "P1_Ultimate";
                     break;
 
                 case 2:
                     HORIZONTAL_AXIS = "P2_Horizontal";
                     VERTICAL_AXIS = "P2_Vertical";
-                    FIRELEFT_AXIS = "P2_FireLeft";
+                    SPECIAL_AXIS = "P2_Special";
                     FIRERIGHT_AXIS = "P2_FireRight";
                     HORIZONTAL_AIM_AXIS = "P2_HorizontalAim";
                     VERTICAL_AIM_AXIS = "P2_VerticalAim";
@@ -50,7 +48,7 @@ public abstract class PlayerSlime : MonoBehaviour {
                 case 3:
                     HORIZONTAL_AXIS = "P3_Horizontal";
                     VERTICAL_AXIS = "P3_Vertical";
-                    FIRELEFT_AXIS = "P3_FireLeft";
+                    SPECIAL_AXIS = "P3_Special";
                     FIRERIGHT_AXIS = "P3_FireRight";
                     HORIZONTAL_AIM_AXIS = "P3_HorizontalAim";
                     VERTICAL_AIM_AXIS = "P3_VerticalAim";
@@ -61,7 +59,7 @@ public abstract class PlayerSlime : MonoBehaviour {
                 case 4:
                     HORIZONTAL_AXIS = "P4_Horizontal";
                     VERTICAL_AXIS = "P4_Vertical";
-                    FIRELEFT_AXIS = "P4_FireLeft";
+                    SPECIAL_AXIS = "P4_Special";
                     FIRERIGHT_AXIS = "P4_FireRight";
                     HORIZONTAL_AIM_AXIS = "P4_HorizontalAim";
                     VERTICAL_AIM_AXIS = "P4_VerticalAim";
@@ -74,7 +72,6 @@ public abstract class PlayerSlime : MonoBehaviour {
         public void ResetBtns()
         {
             //resets booleans for btn_input to false
-            trap = false;
             ultimate = false;
             pause = false;
         }
@@ -195,16 +192,12 @@ public abstract class PlayerSlime : MonoBehaviour {
         //gets all value based input checks
         input.horizontalInput = Input.GetAxis(input.HORIZONTAL_AXIS);
         input.verticalInput = Input.GetAxis(input.VERTICAL_AXIS);
-        input.fireLeftInput = Input.GetAxis(input.FIRELEFT_AXIS);
+        input.special = Input.GetAxis(input.SPECIAL_AXIS);
         input.fireRightInput = Input.GetAxis(input.FIRERIGHT_AXIS);
         input.horizontalAimAxis = Input.GetAxisRaw(input.HORIZONTAL_AIM_AXIS);
         input.verticalAimAxis = Input.GetAxisRaw(input.VERTICAL_AIM_AXIS);
 
         //button input checks
-        if (!input.trap)
-        {
-            input.trap = Input.GetButtonDown(input.TRAP_AXIS);
-        }
         if (!input.ultimate)
         {
             input.ultimate = Input.GetButtonDown(input.ULTIMATE_AXIS);
@@ -246,7 +239,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             reticle.transform.position = new Vector2(gameObject.transform.position.x + xLocation, gameObject.transform.position.y - yLocation); //Update the reticle's position
 
-            if ((input.fireLeftInput != 0 || input.fireRightInput != 0) && damage1Cooldown <= 0.0f) //If the player is firing
+            if (input.fireRightInput != 0 && damage1Cooldown <= 0.0f) //If the player is firing
             {
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
                 health--; //Decrement the player's health

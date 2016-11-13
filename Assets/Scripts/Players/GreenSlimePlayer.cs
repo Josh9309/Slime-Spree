@@ -18,7 +18,10 @@ public class GreenSlimePlayer : PlayerSlime {
 
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        //if(input.ultimate) //
+        //{
+        //
+        //}
     }
 
 
