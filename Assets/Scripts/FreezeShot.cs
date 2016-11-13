@@ -29,10 +29,15 @@ public class FreezeShot : SlimeShot {
             {
                 if (colls[i].transform.tag == "Enemy")
                 {
-                    StartCoroutine( colls[i].transform.GetComponent<Enemy>().freezeEnemy());
+                    
+                    StartCoroutine( colls[i].transform.GetComponent<Enemy>().freezeEnemy(this.gameObject));
+                    coroutineRunning = true;
                 }
             }
-            Destroy(this.gameObject); //Destroy the slime shot
+            if (!coroutineRunning)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

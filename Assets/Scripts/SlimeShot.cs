@@ -14,6 +14,8 @@ public class SlimeShot : MonoBehaviour {
     [SerializeField] protected float knockbackScale;
     protected Rigidbody2D rBody;
     protected Vector3 shotDirection;
+    protected SpriteRenderer sp;
+    protected bool coroutineRunning = false;
     #endregion
 
     // Use this for initialization
@@ -38,6 +40,7 @@ public class SlimeShot : MonoBehaviour {
                 break;
         }
 
+        sp = GetComponentInChildren<SpriteRenderer>();
         slimePlayerScript = player.GetComponent<PlayerSlime>(); //Get the player's script
         slimeShotTarget = slimePlayerScript.Reticle.transform.position; //The target of the slime shot
         rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
@@ -54,7 +57,11 @@ public class SlimeShot : MonoBehaviour {
 
         rBody.AddForce(shotDirection * shotSpeed); //Add forces to shoot the slime shot
 
-        explode();
+        if (!coroutineRunning)
+        {
+            explode();
+        }
+        
     }
 
     /// <summary> 

@@ -97,17 +97,24 @@ public abstract class Enemy : MonoBehaviour {
         } 
     }
 
-    public IEnumerator freezeEnemy()
+    public IEnumerator freezeEnemy(GameObject slimeshot)
     {
+        slimeshot.GetComponent<SpriteRenderer>().enabled = false;
+        slimeshot.GetComponent<Collider2D>().enabled = false;
+
         GameObject freeze2 = GameObject.Instantiate(freeze, transform.position, Quaternion.identity) as GameObject;
-        freeze2.transform.position = transform.position;
-        rb.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         frozen = true;
 
+        Debug.Log(freezeDuration);
         yield return new WaitForSeconds(freezeDuration);
 
+        Debug.Log("Code Reached");
         Destroy(freeze2);
+        rb.constraints = RigidbodyConstraints2D.None;
         frozen = false;
+
+        Destroy(slimeshot);
     }
 
     private void CheckIsAlive()
