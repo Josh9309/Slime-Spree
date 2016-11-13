@@ -101,6 +101,9 @@ public abstract class PlayerSlime : MonoBehaviour {
     private Rigidbody2D rBody;
     private Vector3 fullScale;
     protected InputSettings input = new InputSettings();
+
+    public AudioClip shoot;
+    public AudioClip shoot2;
     #endregion
 
     #region Properties
@@ -246,6 +249,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             if (input.fireRightInput != 0 && damage1Cooldown <= 0.0f) //If the player is firing
             {
+                SoundManager.instance.RandomizeSFx(shoot, shoot2);
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
                 health--; //Decrement the player's health
                 damage1Cooldown = 0.65f; //Set the damage cooldown
