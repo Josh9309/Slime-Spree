@@ -5,6 +5,7 @@ using System;
 public class GreenSlimePlayer : PlayerSlime
 {
     private bool glutton; //Is the player a glutton
+    private bool acid; //Can the player drop acid
     private Behaviour halo; //Ultimate halo
 
     // Use this for initialization
@@ -20,9 +21,9 @@ public class GreenSlimePlayer : PlayerSlime
     new void Update()
     {
         base.Update(); //Call the base update method
-        SlimeAttack2();
-        SlimeUltimate();
-        input.ResetBtns();
+        SlimeAttack2(); //Call the special
+        SlimeUltimate(); //Call the ULTIMATE ATTACK
+        input.ResetBtns(); //Reset buttons
 
         halo.transform.position = transform.position; //Update the position of the halo
     }
@@ -41,7 +42,9 @@ public class GreenSlimePlayer : PlayerSlime
     {
         if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
         {
-            
+            acid = true;
+
+            StartCoroutine(SlimeAttack2Cooldown()); //Enter cooldown
         }
     }
 
@@ -53,6 +56,11 @@ public class GreenSlimePlayer : PlayerSlime
             ModHealth(-20); //decrease players health by the cost of the attack
             StartCoroutine(SlimeUltimateCooldown()); //Enter cooldown
         }
+    }
+
+    protected override void Aim()
+    {
+        base.Aim();
     }
 
     void OnCollisionEnter2D(Collision2D coll) //If the player collides with something

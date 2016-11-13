@@ -162,7 +162,7 @@ public abstract class PlayerSlime : MonoBehaviour {
         //configure InputManager
         input.ConfigureInput(playerNum);
 
-        reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticle = (GameObject)Instantiate(reticleSprite, transform.position, Quaternion.identity); //Instantiate the player's reticle
         reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
         playerSR = GetComponent<SpriteRenderer>(); //Get the player's sprite renderer
 
