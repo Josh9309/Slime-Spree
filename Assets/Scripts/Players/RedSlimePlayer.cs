@@ -9,6 +9,12 @@ public class RedSlimePlayer : PlayerSlime {
     [SerializeField] private GameObject SlimeBurstArea;
     [SerializeField] private GameObject SlimeBurstSprite;
     [SerializeField] private Animator slimeBurstAnim;
+    //2 clips for each effect
+    public AudioClip redUlt;
+    public AudioClip redUlt2;
+    public AudioClip redSpec;
+    public AudioClip redSpec2;
+
     #endregion
 
     // Use this for initialization
@@ -31,6 +37,8 @@ public class RedSlimePlayer : PlayerSlime {
     {
         if (input.special != 0 && health > SlimeBurstCost && slimeAttack2Available)
         {
+            //sound effect
+            SoundManager.instance.RandomizeSFx(redSpec, redSpec2);
             slimeBurstAnim.Play("SlimeBurst");
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
             Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
@@ -59,6 +67,7 @@ public class RedSlimePlayer : PlayerSlime {
     {
         if (input.ultimate && health > SlimeBurstCost && slimeUltimateAvailable)
         {
+            SoundManager.instance.RandomizeSFx(redUlt, redUlt2);
 
             slimeBurstAnim.Play("SlimeBurst");
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
