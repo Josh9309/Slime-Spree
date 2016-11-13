@@ -245,9 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels: []
   goalEnemies: []
-  attackEnemies: []
   goalEnemyPrefab: {fileID: 150500, guid: 3c038f27d0e270f4aa1e6b8271ab0cb1, type: 2}
-  attackEnemyPrefab: {fileID: 0}
 --- !u!4 &542157558
 Transform:
   m_ObjectHideFlags: 0
