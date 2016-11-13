@@ -3,7 +3,9 @@ using System.Collections;
 using System;
 
 public class YellowSlimePlayer : PlayerSlime {
+    #region Attributes
 
+    #endregion
 
     // Use this for initialization
     new void Start()
@@ -24,7 +26,7 @@ public class YellowSlimePlayer : PlayerSlime {
 
     protected override void SlimeUltimate()
     {
-        throw new NotImplementedException();
+        
     }
 
 }

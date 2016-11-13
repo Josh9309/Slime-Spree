@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class PlayerSlime : MonoBehaviour {
-    public enum SlimeType { RED, BLUE, YELLOW, GREEN };
+    public enum SlimeType { RED, BLUE, YELLOW, GREEN, NOCOLOR };
 
     #region InputSettings
     //this will setup the public inputSetting class
