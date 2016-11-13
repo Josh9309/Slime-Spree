@@ -6,6 +6,7 @@ public class GreenSlimePlayer : PlayerSlime
 {
     private bool glutton; //Is the player a glutton
     private bool acid; //Can the player drop acid
+    [SerializeField] private GameObject slimeShotObject;
     private Behaviour halo; //Ultimate halo
 
     // Use this for initialization
@@ -42,8 +43,8 @@ public class GreenSlimePlayer : PlayerSlime
     {
         if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
         {
-            acid = true;
-
+            health -= 10;
+            Instantiate(freezeShotObject, transform.position, Quaternion.identity);
             StartCoroutine(SlimeAttack2Cooldown()); //Enter cooldown
         }
     }
