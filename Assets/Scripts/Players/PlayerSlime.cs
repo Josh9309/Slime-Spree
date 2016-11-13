@@ -95,7 +95,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] private float knockbackScale;
     protected bool slimeAttack2Available = true;
     protected bool slimeUltimateAvailable = true;
-    private GameObject reticle; //The reticle
+    protected GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
     private Rigidbody2D rBody;
@@ -148,7 +148,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     #endregion
 
     // Use this for initialization
-    protected void Start()
+    protected virtual void Start()
     {
         //Assign body
         rBody = GetComponent<Rigidbody2D>();
@@ -168,7 +168,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     }
 	
 	//Update is called once per frame
-	protected void Update()
+	protected virtual void Update()
     {
         Aim(); //Aim
         SlimeShotCooldown(); //The slime shot's cooldown
