@@ -77,7 +77,7 @@ MonoBehaviour:
   damage: 1
   target: {fileID: 150124, guid: b587cd65314012e4c967110bf5fe7a4d, type: 2}
   maxSpeed: 3
-  slimeType: 1
+  slimeType: 4
   healthDrop: {fileID: 148504, guid: a588bd35cc31e0a45927ff3df85dca7c, type: 2}
 --- !u!212 &21227246
 SpriteRenderer:
@@ -140,7 +140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeType
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x

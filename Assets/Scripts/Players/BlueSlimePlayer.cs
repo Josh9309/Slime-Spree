@@ -20,7 +20,9 @@ public class BlueSlimePlayer : PlayerSlime {
 
     /// <summary>
     /// Freeze shot, will shoot a projectile until it
-    /// hits something
+    /// hits something or goes until its max range, distance
+    /// from position to reticle, then will explode in 
+    /// an AOE attack, freezing all enemies in range
     /// </summary>
     protected override void SlimeAttack2()
     {
