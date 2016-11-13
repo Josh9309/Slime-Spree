@@ -150,7 +150,7 @@ MonoBehaviour:
   health: 100
   speed: 7
   deceleration: 1.79999995
-  playerNum: 4
+  playerNum: 2
   attack1Down: 0
   slimeShotDamage: 1
   slimeAttack2Damage: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
   slimeShotGameObject: {fileID: 146074, guid: f7869ffb852e0e44f926a7dd8a15e5b5, type: 2}
   knockbackScale: 0
+  shoot: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
+  shoot2: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
   SlimeBurstRange: 4
   SlimeBurstCost: 20
   SlimeBurstArea: {fileID: 162352}
@@ -270,7 +272,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotRange
@@ -330,6 +332,14 @@ Prefab:
       propertyPath: redSpec2
       value: 
       objectReference: {fileID: 8300000, guid: 839868efaef564448b140d7e7caa0945, type: 3}
+    - target: {fileID: 0}
+      propertyPath: shoot
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
+    - target: {fileID: 0}
+      propertyPath: shoot2
+      value: 
+      objectReference: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172074}
