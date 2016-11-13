@@ -5,12 +5,15 @@ using System;
 public class GreenSlimePlayer : PlayerSlime
 {
     private bool glutton; //Is the player a glutton
+    private Behaviour halo; //Ultimate halo
 
     // Use this for initialization
     new void Start()
     {
         base.Start(); //Call the base start method
         glutton = false; //The player is not a glutton
+        halo = (Behaviour)GetComponent("Halo"); //Get the halo
+        halo.enabled = false; //Disable the halo
     }
 
     // Update is called once per frame
@@ -20,11 +23,23 @@ public class GreenSlimePlayer : PlayerSlime
         SlimeAttack2();
         SlimeUltimate();
         input.ResetBtns();
+
+        halo.transform.position = transform.position; //Update the position of the halo
+    }
+
+    IEnumerator UltimateTimer(float time) //Ultimate timer co-routine
+    {
+        glutton = true; //The player becomes a glutton
+        halo.enabled = true; //Enable the halo's sprite renderer
+
+        yield return new WaitForSeconds(time); //Timer
+        glutton = false; //The player is not a glutton
+        halo.enabled = false; //Disable the halo's sprite renderer
     }
 
     protected override void SlimeAttack2() //The green player's special
     {
-        if(input.special != 0 && health > 21 && slimeAttack2Available) //If the special can be used
+        if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
         {
             
         }
@@ -34,7 +49,7 @@ public class GreenSlimePlayer : PlayerSlime
     {
         if (input.ultimate && health > 21 && slimeUltimateAvailable) //If the ultimate can be used
         {
-            glutton = true; //The player is a glutton
+            StartCoroutine(UltimateTimer(5));
             ModHealth(-20); //decrease players health by the cost of the attack
             StartCoroutine(SlimeUltimateCooldown()); //Enter cooldown
         }
@@ -42,16 +57,13 @@ public class GreenSlimePlayer : PlayerSlime
 
     void OnCollisionEnter2D(Collision2D coll) //If the player collides with something
     {
-        Debug.Log("CAT");
-        if (coll.gameObject.name == "GoalEnemy(Clone)" && glutton) //If the player collides with an enemy and is not glutton
+        if (coll.gameObject.name.Contains("GoalEnemy(Clone)") && glutton) //If the player collides with an enemy and is not glutton
         {
-            Debug.Log("");
             health += 11; //Regain 10 health
             Destroy(coll.gameObject); //Destroy the enemy
         }
-        if (coll.gameObject.name == "AttackEnemy(Clone)" && glutton) //If the player collides with an enemy and is not glutton
+        if (coll.gameObject.name.Contains("AttackEnemy(Clone)") && glutton) //If the player collides with an enemy and is not glutton
         {
-            Debug.Log("");
             health += 12; //Regain 10 health
             Destroy(coll.gameObject); //Destroy the enemy
         }
