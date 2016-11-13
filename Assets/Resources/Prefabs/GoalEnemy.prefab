@@ -80,7 +80,7 @@ MonoBehaviour:
   slimeType: 4
   healthDrop: {fileID: 148504, guid: a588bd35cc31e0a45927ff3df85dca7c, type: 2}
   freezeDuration: 5
-  freezeTexture: {fileID: 21300000, guid: 836ab77a03b56734d8326aeb217e8f8a, type: 3}
+  freeze: {fileID: 117000, guid: ec0f3e6bb62b5cf478b90aabb806201a, type: 2}
 --- !u!212 &21227246
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -169,6 +169,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 836ab77a03b56734d8326aeb217e8f8a,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: freeze
+      value: 
+      objectReference: {fileID: 117000, guid: ec0f3e6bb62b5cf478b90aabb806201a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 150500}
