@@ -4,6 +4,9 @@ using System;
 
 public class BlueSlimePlayer : PlayerSlime {
 
+    [SerializeField]
+    private GameObject freezeShotObject;
+
     // Use this for initialization
     new void Start()
     {
@@ -15,7 +18,7 @@ public class BlueSlimePlayer : PlayerSlime {
     {
         base.Update(); //Call the base update method
 
-       
+        SlimeAttack2();
     }
 
     /// <summary>
@@ -26,7 +29,12 @@ public class BlueSlimePlayer : PlayerSlime {
     /// </summary>
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        if (input.special != 0.0f && health > 10 && slimeAttack2Available)
+        {
+            health -= 10;
+            Instantiate(freezeShotObject, transform.position, Quaternion.identity);
+            StartCoroutine(SlimeAttack2Cooldown());
+        }
     }
 
     protected override void SlimeUltimate()

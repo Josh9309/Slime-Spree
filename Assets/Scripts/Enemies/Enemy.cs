@@ -16,6 +16,10 @@ public abstract class Enemy : MonoBehaviour {
     [SerializeField] protected PlayerSlime.SlimeType slimeType;
     protected bool canTriggerGoal;
     [SerializeField] private GameObject healthDrop; //Drop health for the player
+    protected bool frozen = false;
+    [SerializeField] protected float freezeDuration;
+    protected float freezeTimer = 0.0f;
+    [SerializeField] private Sprite freezeTexture;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
     #region Properties
@@ -31,6 +35,12 @@ public abstract class Enemy : MonoBehaviour {
     public bool CanTriggerGoal
     {
         get { return canTriggerGoal; }
+    }
+
+    public bool Frozen
+    {
+        get { return frozen; }
+        set { frozen = value; }
     }
     #endregion
 
@@ -69,16 +79,41 @@ public abstract class Enemy : MonoBehaviour {
     /// </summary>
     public void Move()
     {
-        Vector3 unitOffset = Seek();
-        transform.up = unitOffset;
-        Vector3 acceleration = unitOffset * moveSpeed;
-        rb.AddForce(acceleration);
-        float velX = Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed);
-        float velY = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
+        if (frozen == false)
+        {
+            freezeTimer = 0.0f;
+            Vector3 unitOffset = Seek();
+            transform.up = unitOffset;
+            Vector3 acceleration = unitOffset * moveSpeed;
+            rb.AddForce(acceleration);
+            float velX = Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed);
+            float velY = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
 
-        rb.velocity = new Vector3(velX, velY, 0);
-        //rb.velocity = unitOffset * moveSpeed;
-        //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+            rb.velocity = new Vector3(velX, velY, 0);
+        }
+        else
+        {
+            Freeze();   
+        }
+    }
+
+    /// <summary>
+    /// will freeze enemy and update timer if frozen is
+    /// true
+    /// </summary>
+    protected void Freeze()
+    {
+        //GameObject freeze = new GameObject();
+        //freeze. = freezeTexture;
+        //GameObject.Instantiate(, transform.position, Quaternion.identity);
+        //rb.velocity = Vector3.zero;
+        //freezeTimer += Time.deltaTime;
+        //
+        //if (freezeTimer >= freezeDuration)
+        //{
+        //    Destroy(freezeRender);
+        //    frozen = false;
+        //}
     }
 
     private void CheckIsAlive()
