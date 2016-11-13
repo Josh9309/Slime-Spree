@@ -29,6 +29,11 @@ public class GreenSlimePlayer : PlayerSlime
         halo.transform.position = transform.position; //Update the position of the halo
     }
 
+    IEnumerator SpecialTimer(float time) //Ultimate timer co-routine
+    {
+        yield return new WaitForSeconds(time); //Timer
+    }
+
     IEnumerator UltimateTimer(float time) //Ultimate timer co-routine
     {
         glutton = true; //The player becomes a glutton
@@ -43,8 +48,8 @@ public class GreenSlimePlayer : PlayerSlime
     {
         if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
         {
-            health -= 10;
-            Instantiate(acidShot, transform.position, Quaternion.identity);
+            health -= 10; //Decrement the player's health
+            Instantiate(acidShot, transform.position, Quaternion.identity); //Spawn the acid
             StartCoroutine(SlimeAttack2Cooldown()); //Enter cooldown
         }
     }

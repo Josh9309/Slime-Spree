@@ -82,8 +82,6 @@ MonoBehaviour:
   slimeShotCooldown: 0
   slimeAttack2Cooldown: 0
   slimeUltimateCooldown: 0
-  damage1Cooldown: 0
-  damage2Cooldown: 0
   slimerType: 2
   slimeShotRange: 12
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
@@ -142,7 +140,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotRange
