@@ -150,7 +150,7 @@ MonoBehaviour:
   health: 100
   speed: 7
   deceleration: 1.79999995
-  playerNum: 2
+  playerNum: 4
   attack1Down: 0
   slimeShotDamage: 1
   slimeAttack2Damage: 0
@@ -170,6 +170,10 @@ MonoBehaviour:
   SlimeBurstArea: {fileID: 162352}
   SlimeBurstSprite: {fileID: 168118}
   slimeBurstAnim: {fileID: 9579668}
+  redUlt: {fileID: 8300000, guid: f1e2067099c73c44ea5603bce8c1bd14, type: 3}
+  redUlt2: {fileID: 8300000, guid: f1e2067099c73c44ea5603bce8c1bd14, type: 3}
+  redSpec: {fileID: 8300000, guid: 839868efaef564448b140d7e7caa0945, type: 3}
+  redSpec2: {fileID: 8300000, guid: 839868efaef564448b140d7e7caa0945, type: 3}
 --- !u!122 &12210944
 Halo:
   m_ObjectHideFlags: 1
@@ -266,7 +270,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotRange
@@ -310,6 +314,22 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: redUlt
+      value: 
+      objectReference: {fileID: 8300000, guid: f1e2067099c73c44ea5603bce8c1bd14, type: 3}
+    - target: {fileID: 0}
+      propertyPath: redUlt2
+      value: 
+      objectReference: {fileID: 8300000, guid: f1e2067099c73c44ea5603bce8c1bd14, type: 3}
+    - target: {fileID: 0}
+      propertyPath: redSpec
+      value: 
+      objectReference: {fileID: 8300000, guid: 839868efaef564448b140d7e7caa0945, type: 3}
+    - target: {fileID: 0}
+      propertyPath: redSpec2
+      value: 
+      objectReference: {fileID: 8300000, guid: 839868efaef564448b140d7e7caa0945, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172074}

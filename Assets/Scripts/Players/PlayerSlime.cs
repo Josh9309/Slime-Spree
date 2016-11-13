@@ -101,6 +101,9 @@ public abstract class PlayerSlime : MonoBehaviour {
     private Rigidbody2D rBody;
     private Vector3 fullScale;
     protected InputSettings input = new InputSettings();
+
+    public AudioClip shoot;
+    public AudioClip shoot2;
     #endregion
 
     #region Properties
@@ -169,7 +172,7 @@ public abstract class PlayerSlime : MonoBehaviour {
         //configure InputManager
         input.ConfigureInput(playerNum);
 
-        reticle = (GameObject)Instantiate(reticleSprite, gameObject.transform.position, Quaternion.identity); //Instantiate the player's reticle
+        reticle = (GameObject)Instantiate(reticleSprite, transform.position, Quaternion.identity); //Instantiate the player's reticle
         reticleSR = reticle.GetComponent<SpriteRenderer>(); //Get the reticle's sprite renderer
         playerSR = GetComponent<SpriteRenderer>(); //Get the player's sprite renderer
 
@@ -256,6 +259,7 @@ public abstract class PlayerSlime : MonoBehaviour {
 
             if (input.fireRightInput != 0 && damage1Cooldown <= 0.0f) //If the player is firing
             {
+                SoundManager.instance.RandomizeSFx(shoot, shoot2);
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
                 health--; //Decrement the player's health
                 damage1Cooldown = 0.65f; //Set the damage cooldown

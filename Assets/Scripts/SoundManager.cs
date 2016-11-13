@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour {
     public AudioSource sfxSource;
     //backgound music
     public AudioSource musicSource;
-
+   
     public static SoundManager instance = null;
 
     public float lowPitch = .95f;
@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour {
 	}
 
     //Play random effects at random pitch to add variety
-    public void PlayingSingle(AudioClip [] clips)
+    public void RandomizeSFx(params AudioClip [] clips)
     {
         int randomIndex = Random.Range(0, clips.Length);
         float randomPitch = Random.Range(lowPitch, highPitch);

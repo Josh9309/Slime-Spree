@@ -43,6 +43,8 @@ public class SlimeShot : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>(); //Get the slime shot's rigidbody
 
         damage = slimePlayerScript.SlimeShotDamage;
+
+        Debug.Log(slimeShotTarget);
     }
 	
 	// Update is called once per frame

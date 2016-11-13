@@ -26,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.40465164, y: -20.6658936, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.4216013, y: 1.27262115, z: 0}
+  m_LocalScale: {x: 1.58257961, y: 1.58257949, z: 1.58257949}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,9 +71,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d38cde940c37548b3949c3624bc27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slimeType: 0
-  shotSpeed: 0
+  slimeType: 1
+  shotSpeed: 25
   knockbackScale: 0
+  freezeRadius: 5
 --- !u!212 &21282594
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -100,15 +101,28 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c2c51b55e19c45743b458a7c4e6616e3, type: 3}
-  m_Color: {r: 0, g: .46274513, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d2a2318cfe0f8b3488c59a4b67db8f2a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d2a2318cfe0f8b3488c59a4b67db8f2a,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: slimeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: shotSpeed
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192436}
