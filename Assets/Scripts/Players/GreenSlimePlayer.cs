@@ -44,7 +44,7 @@ public class GreenSlimePlayer : PlayerSlime
         if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
         {
             health -= 10;
-            Instantiate(freezeShotObject, transform.position, Quaternion.identity);
+            //Instantiate(freezeShotObject, transform.position, Quaternion.identity);
             StartCoroutine(SlimeAttack2Cooldown()); //Enter cooldown
         }
     }

@@ -8,6 +8,8 @@ public class SlimeLightingWall : MonoBehaviour {
     private YellowSlimePlayer yellowSlime;
     private bool active = true;
     [SerializeField] private float duration = 7;
+    [SerializeField]
+    private float knockBackForce = 300;
     #endregion
 
     // Use this for initialization
@@ -37,7 +39,7 @@ public class SlimeLightingWall : MonoBehaviour {
             enemySlime.health -= damage; //enemy takes damage
 
             Rigidbody2D enemyRBody = enemySlime.GetComponent<Rigidbody2D>();
-            enemyRBody.AddForce(-enemyRBody.velocity * 3);
+            enemyRBody.AddForce(-enemyRBody.velocity * knockBackForce);
         }
     }
 }
