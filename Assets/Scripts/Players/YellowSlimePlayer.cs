@@ -7,6 +7,9 @@ public class YellowSlimePlayer : PlayerSlime {
     [SerializeField] private int slimeWallCost;
     [SerializeField] private GameObject slimeLightingPrefab;
     private GameObject slimeLightingWall;
+
+    public AudioClip yellowLightning;
+    public AudioClip yellowLightning2;
     #endregion
 
     // Use this for initialization
@@ -33,6 +36,7 @@ public class YellowSlimePlayer : PlayerSlime {
     {
         if(input.ultimate && health > slimeWallCost && slimeUltimateAvailable)
         {
+            SoundManager.instance.RandomizeSFx(yellowLightning, yellowLightning2);
             Debug.DrawLine(transform.position, Reticle.transform.position, Color.yellow, 5);
             Vector3 wallRightVector = Reticle.transform.position - transform.position;
             slimeLightingWall = Instantiate(slimeLightingPrefab, transform.position, Quaternion.identity) as GameObject;

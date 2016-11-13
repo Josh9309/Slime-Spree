@@ -101,8 +101,6 @@ public abstract class PlayerSlime : MonoBehaviour {
     private Vector3 fullScale;
     protected InputSettings input = new InputSettings();
 
-    public AudioClip shoot;
-    public AudioClip shoot2;
     #endregion
 
     #region Properties
