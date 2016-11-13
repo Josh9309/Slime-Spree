@@ -14,6 +14,7 @@ public class RedSlimePlayer : PlayerSlime {
     public AudioClip redUlt2;
     public AudioClip redSpec;
     public AudioClip redSpec2;
+    private Behaviour halo; //Ultimate halo
 
     #endregion
 
@@ -21,7 +22,9 @@ public class RedSlimePlayer : PlayerSlime {
     new void Start()
     {
         base.Start(); //Call the base start method
-	}
+        halo = (Behaviour)GetComponent("Halo"); //Get the halo
+        halo.enabled = false;
+    }
 	
 	// Update is called once per frame
 	new void Update()
@@ -69,7 +72,8 @@ public class RedSlimePlayer : PlayerSlime {
         {
             SoundManager.instance.RandomizeSFx(redUlt, redUlt2);
 
-            slimeBurstAnim.Play("SlimeBurst");
+            StartCoroutine(DisplaySlimeBurst());
+
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
             Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
 
@@ -90,7 +94,15 @@ public class RedSlimePlayer : PlayerSlime {
             ModHealth(-SlimeBurstCost); //decrease players health by the cost of the attack
             StartCoroutine(SlimeUltimateCooldown());
         }
-        
+    }
+
+    private IEnumerator DisplaySlimeBurst()
+    {
+        halo.enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        halo.enabled = false;
     }
 
 }
