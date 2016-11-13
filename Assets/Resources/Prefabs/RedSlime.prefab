@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &5893652
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -301,6 +301,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: slimeAttack2Cooldown
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
