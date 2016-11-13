@@ -6,6 +6,8 @@ public class YellowSlimePlayer : PlayerSlime {
     #region Attributes
     [SerializeField] private int slimeWallCost;
     [SerializeField] private GameObject slimeLightingPrefab;
+    [SerializeField]
+    private GameObject electricShotObject;
     private GameObject slimeLightingWall;
 
     public AudioClip yellowLightning;
@@ -29,7 +31,12 @@ public class YellowSlimePlayer : PlayerSlime {
 
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        if (input.special != 0.0f && health > 11 && slimeAttack2Available) //Don't die
+        {
+            health -= 10;
+            Instantiate(electricShotObject, transform.position, Quaternion.identity);
+            StartCoroutine(SlimeAttack2Cooldown());
+        }
     }
 
     protected override void SlimeUltimate()

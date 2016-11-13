@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class ElectricSlimeShot : SlimeShot {
-    [SerializeField] private float electricRadius;
+
+    [SerializeField]
+    private float eletricSlimeRadius;
 
     // Use this for initialization
     protected override void Awake()
@@ -15,7 +17,9 @@ public class ElectricSlimeShot : SlimeShot {
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
+        shotDirection = (slimeShotTarget - transform.position).normalized;
+
+        rBody.AddForce(shotDirection * shotSpeed); //Add forces to shoot the slime shot
     }
 
     protected override void explode()
@@ -23,17 +27,22 @@ public class ElectricSlimeShot : SlimeShot {
         if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
         {
             // get all colliders
-            Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, electricRadius);
+            Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, eletricSlimeRadius);
 
             // check each collider to see if its an enemy
             for (int i = 0; i < colls.Length; i++)
             {
                 if (colls[i].transform.tag == "Enemy")
                 {
-                    StartCoroutine(colls[i].transform.GetComponent<Enemy>().freezeEnemy());
+
+                    StartCoroutine(colls[i].transform.GetComponent<Enemy>().EletrocuteEnemy(this.gameObject));
+                    coroutineRunning = true;
                 }
             }
-            Destroy(this.gameObject); //Destroy the slime shot
+            if (!coroutineRunning)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -44,7 +53,23 @@ public class ElectricSlimeShot : SlimeShot {
             Enemy enemySlime = coll.gameObject.GetComponent<Enemy>();
             if (enemySlime.SlimeType != slimePlayerScript.SlimerType)
             {
-                explode();
+                // get all colliders
+                Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, eletricSlimeRadius);
+
+                // check each collider to see if its an enemy
+                for (int i = 0; i < colls.Length; i++)
+                {
+                    if (colls[i].transform.tag == "Enemy")
+                    {
+
+                        StartCoroutine(colls[i].transform.GetComponent<Enemy>().EletrocuteEnemy(this.gameObject));
+                        coroutineRunning = true;
+                    }
+                }
+                if (!coroutineRunning)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public abstract class Enemy : MonoBehaviour {
 
@@ -20,6 +21,11 @@ public abstract class Enemy : MonoBehaviour {
     [SerializeField] protected float freezeDuration;
     protected float freezeTimer = 0.0f;
     [SerializeField] private GameObject freeze;
+    [SerializeField]
+    private GameObject electricStun;
+    [SerializeField]
+    protected float electricDuration;
+    protected bool shockStun = false;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
     #region Properties
@@ -83,7 +89,7 @@ public abstract class Enemy : MonoBehaviour {
     /// </summary>
     public void Move()
     {
-        if (frozen == false)
+        if (frozen == false || !shockStun)
         {
             freezeTimer = 0.0f;
             Vector3 unitOffset = Seek();
@@ -117,11 +123,29 @@ public abstract class Enemy : MonoBehaviour {
         Destroy(slimeshot);
     }
 
+    public IEnumerator EletrocuteEnemy(GameObject slimeshot)
+    {
+        slimeshot.GetComponent<SpriteRenderer>().enabled = false;
+        slimeshot.GetComponent<Collider2D>().enabled = false;
+
+        GameObject electric = GameObject.Instantiate(electricStun, transform.position, Quaternion.identity) as GameObject;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        shockStun = true;
+
+        yield return new WaitForSeconds(electricDuration);
+
+        Debug.Log("Code Reached");
+        Destroy(electric);
+        rb.constraints = RigidbodyConstraints2D.None;
+        shockStun = false;
+
+        Destroy(slimeshot);
+    }
     private void CheckIsAlive()
     {
         if( health <= 0) //If the enemy has no health
         {
-            if(50 >= Random.Range(0, 101)) //If the enemy should drop health
+            if(50 >= UnityEngine.Random.Range(0, 101)) //If the enemy should drop health
             {
                 Instantiate(healthDrop, transform.position, Quaternion.identity); //Drop health
             }

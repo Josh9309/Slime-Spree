@@ -7,6 +7,7 @@ public class RedSlimePlayer : PlayerSlime {
     [SerializeField] private float SlimeBurstRange = 2;
     [SerializeField] private int SlimeBurstCost = 20;
     [SerializeField] private GameObject SlimeBurstArea;
+    [SerializeField] private GameObject HealBurstArea;
     [SerializeField] private GameObject SlimeBurstSprite;
     [SerializeField] private Animator slimeBurstAnim;
     //2 clips for each effect
@@ -14,7 +15,8 @@ public class RedSlimePlayer : PlayerSlime {
     public AudioClip redUlt2;
     public AudioClip redSpec;
     public AudioClip redSpec2;
-    private Behaviour halo; //Ultimate halo
+    private Behaviour bursthalo; //Ultimate halo
+    private Behaviour healhalo; //special halo
 
     #endregion
 
@@ -22,8 +24,10 @@ public class RedSlimePlayer : PlayerSlime {
     new void Start()
     {
         base.Start(); //Call the base start method
-        halo = (Behaviour)GetComponent("Halo"); //Get the halo
-        halo.enabled = false;
+        bursthalo = (Behaviour)SlimeBurstArea.GetComponent("Halo"); //Get the halo
+        healhalo = (Behaviour)HealBurstArea.GetComponent("Halo"); //Get the halo
+        bursthalo.enabled = false;
+        healhalo.enabled = false;
     }
 	
 	// Update is called once per frame
@@ -42,9 +46,9 @@ public class RedSlimePlayer : PlayerSlime {
         {
             //sound effect
             SoundManager.instance.RandomizeSFx(redSpec, redSpec2);
-            slimeBurstAnim.Play("SlimeBurst");
+            StartCoroutine(DisplayHealBurst());
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
-            Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+            //Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
 
             foreach (Collider2D thing in cols)
             {
@@ -75,7 +79,7 @@ public class RedSlimePlayer : PlayerSlime {
             StartCoroutine(DisplaySlimeBurst());
 
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
-            Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+           // Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
 
             foreach (Collider2D thing in cols)
             {
@@ -98,11 +102,20 @@ public class RedSlimePlayer : PlayerSlime {
 
     private IEnumerator DisplaySlimeBurst()
     {
-        halo.enabled = true;
+        bursthalo.enabled = true;
 
         yield return new WaitForSeconds(0.5f);
 
-        halo.enabled = false;
+        bursthalo.enabled = false;
+    }
+
+    private IEnumerator DisplayHealBurst()
+    {
+        healhalo.enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        healhalo.enabled = false;
     }
 
 }
