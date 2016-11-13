@@ -3,8 +3,11 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
 
+    //sound Effects
     public AudioSource sfxSource;
+    //backgound music
     public AudioSource musicSource;
+
     public static SoundManager instance = null;
 
     public float lowPitch = .95f;
@@ -12,6 +15,7 @@ public class SoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake ()
     {
+       
 	if (instance == null)
         {
             instance = this;
@@ -24,6 +28,7 @@ public class SoundManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 	}
 
+    //Play random effects at random pitch to add variety
     public void PlayingSingle(AudioClip [] clips)
     {
         int randomIndex = Random.Range(0, clips.Length);

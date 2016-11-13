@@ -22,13 +22,36 @@ public class RedSlimePlayer : PlayerSlime {
     {
         base.Update(); //Call the base update method
         SlimeUltimate();
+        SlimeAttack2();
         input.ResetBtns();
 	}
 
     
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        if (input.special != 0 && health > SlimeBurstCost && slimeAttack2Available)
+        {
+            slimeBurstAnim.Play("SlimeBurst");
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
+            Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+
+            foreach (Collider2D thing in cols)
+            {
+                if (thing.tag == "Player")// the slime burst has hit a player
+                {
+                    PlayerSlime slimePlayer = thing.GetComponent<PlayerSlime>();
+
+                    if (slimePlayer.SlimerType != PlayerSlime.SlimeType.RED)
+                    {
+                        slimePlayer.Health += 100; //kill enemy
+                    }
+
+                }
+            }
+
+            ModHealth(-SlimeBurstCost); //decrease players health by the cost of the attack
+            StartCoroutine(SlimeAttack2Cooldown());
+        }
     }
 
     //Red Slime SlimeBurst AOE Attack
