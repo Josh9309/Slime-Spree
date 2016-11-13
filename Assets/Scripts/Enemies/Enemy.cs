@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour {
     protected bool frozen = false;
     [SerializeField] protected float freezeDuration;
     protected float freezeTimer = 0.0f;
-    [SerializeField] private Sprite freezeTexture;
+    [SerializeField] private GameObject freeze;
     //public Vector3 startPos = new Vector3(0, 0 ,0);
     //--------------------
     #region Properties
@@ -58,6 +58,10 @@ public abstract class Enemy : MonoBehaviour {
         {
             target = GameObject.FindGameObjectWithTag("Goal");
         }
+        if (frozen)
+        {
+            freeze.transform.position = transform.position;
+        }
         Move();
         CheckIsAlive();
     }
@@ -90,30 +94,20 @@ public abstract class Enemy : MonoBehaviour {
             float velY = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
 
             rb.velocity = new Vector3(velX, velY, 0);
-        }
-        else
-        {
-            Freeze();   
-        }
+        } 
     }
 
-    /// <summary>
-    /// will freeze enemy and update timer if frozen is
-    /// true
-    /// </summary>
-    protected void Freeze()
+    public IEnumerator freezeEnemy()
     {
-        //GameObject freeze = new GameObject();
-        //freeze. = freezeTexture;
-        //GameObject.Instantiate(, transform.position, Quaternion.identity);
-        //rb.velocity = Vector3.zero;
-        //freezeTimer += Time.deltaTime;
-        //
-        //if (freezeTimer >= freezeDuration)
-        //{
-        //    Destroy(freezeRender);
-        //    frozen = false;
-        //}
+        GameObject freeze2 = GameObject.Instantiate(freeze, transform.position, Quaternion.identity) as GameObject;
+        freeze2.transform.position = transform.position;
+        rb.velocity = Vector3.zero;
+        frozen = true;
+
+        yield return new WaitForSeconds(freezeDuration);
+
+        Destroy(freeze2);
+        frozen = false;
     }
 
     private void CheckIsAlive()

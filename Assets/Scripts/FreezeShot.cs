@@ -29,7 +29,7 @@ public class FreezeShot : SlimeShot {
             {
                 if (colls[i].transform.tag == "Enemy")
                 {
-                    colls[i].transform.GetComponent<Enemy>().Frozen = true;
+                    StartCoroutine( colls[i].transform.GetComponent<Enemy>().freezeEnemy());
                 }
             }
             Destroy(this.gameObject); //Destroy the slime shot

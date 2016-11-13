@@ -29,7 +29,7 @@ public class BlueSlimePlayer : PlayerSlime {
     /// </summary>
     protected override void SlimeAttack2()
     {
-        if (input.special != 0.0f && health > 10 && slimeAttack2Available)
+        if (input.special != 0.0f && health > 11 && slimeAttack2Available) //Don't die
         {
             health -= 10;
             Instantiate(freezeShotObject, transform.position, Quaternion.identity);
