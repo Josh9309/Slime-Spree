@@ -46,7 +46,7 @@ public class GreenSlimePlayer : PlayerSlime
 
     protected override void SlimeAttack2() //The green player's special
     {
-        if(input.special != 0 && health > 11 && slimeAttack2Available) //If the special can be used
+        if(input.special != 0 && health > 10 && slimeAttack2Available) //If the special can be used
         {
             health -= 10; //Decrement the player's health
             Instantiate(acidShot, transform.position, Quaternion.identity); //Spawn the acid
@@ -56,10 +56,10 @@ public class GreenSlimePlayer : PlayerSlime
 
     protected override void SlimeUltimate() //The green player's ultimate
     {
-        if (input.ultimate && health > 21 && slimeUltimateAvailable) //If the ultimate can be used
+        if (input.ultimate && health > 15 && slimeUltimateAvailable) //If the ultimate can be used
         {
             StartCoroutine(UltimateTimer(5));
-            ModHealth(-20); //decrease players health by the cost of the attack
+            ModHealth(-15); //decrease players health by the cost of the attack
             StartCoroutine(SlimeUltimateCooldown()); //Enter cooldown
         }
     }

@@ -77,7 +77,7 @@ MonoBehaviour:
   deceleration: 1.79999995
   playerNum: 3
   attack1Down: 0
-  slimeShotDamage: 1
+  slimeShotDamage: 5
   slimeAttack2Damage: 0
   slimeUltimateDamage: 0
   slimeShotCooldown: 1
@@ -175,7 +175,7 @@ Prefab:
       objectReference: {fileID: 146074, guid: 94d25e19073d8ea4c977bc3199ecfb7c, type: 2}
     - target: {fileID: 0}
       propertyPath: slimeShotDamage
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotCooldown

@@ -74,9 +74,9 @@ MonoBehaviour:
   health: 100
   speed: 7
   deceleration: 1.79999995
-  playerNum: 3
+  playerNum: 4
   attack1Down: 0
-  slimeShotDamage: 1
+  slimeShotDamage: 5
   slimeAttack2Damage: 0
   slimeUltimateDamage: 0
   slimeShotCooldown: 0
@@ -87,8 +87,6 @@ MonoBehaviour:
   reticleSprite: {fileID: 167796, guid: f3bafdd0d7955e140a58663b957f48e2, type: 2}
   slimeShotGameObject: {fileID: 146074, guid: 2a8a57cfd15f04d49b3f2c49843fd4cc, type: 2}
   knockbackScale: 0
-  shoot: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
-  shoot2: {fileID: 8300000, guid: 2d7ab5b5f3bd64b4cb2d956d0455bbef, type: 3}
   freezeShotObject: {fileID: 192436, guid: 75e4d0b5efd5821429d0bb2121cf32bb, type: 2}
 --- !u!212 &21206138
 SpriteRenderer:
@@ -139,7 +137,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: slimeShotRange
@@ -165,7 +163,7 @@ Prefab:
       objectReference: {fileID: 146074, guid: 2a8a57cfd15f04d49b3f2c49843fd4cc, type: 2}
     - target: {fileID: 0}
       propertyPath: slimeShotDamage
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage1Cooldown

@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackScale: 0
   moveSpeed: 8
-  health: 1
+  health: 15
   damage: 1
   target: {fileID: 150124, guid: b587cd65314012e4c967110bf5fe7a4d, type: 2}
   maxSpeed: 3
@@ -182,6 +182,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: electricDuration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

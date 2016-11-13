@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackScale: 300
   moveSpeed: 9
-  health: 2
+  health: 30
   damage: 2
   target: {fileID: 0}
   maxSpeed: 3
@@ -186,7 +186,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: health
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: damage
