@@ -11,6 +11,7 @@ public class SlimeShot : MonoBehaviour {
     private PlayerSlime slimePlayerScript;
     [SerializeField] private PlayerSlime.SlimeType slimeType;
     [SerializeField] private float shotSpeed;
+    [SerializeField] private float knockbackScale;
     private Rigidbody2D rBody;
     private Vector3 shotDirection;
     #endregion
@@ -53,7 +54,6 @@ public class SlimeShot : MonoBehaviour {
 
         if (Mathf.Abs(slimeShotTarget.x - rBody.position.x) / 7 <= 0.05f && Mathf.Abs(slimeShotTarget.y - rBody.position.y) / 7 <= 0.05f)
         {
-            Debug.Log(new Vector2(Mathf.Abs(slimeShotTarget.x - rBody.position.x), Mathf.Abs(slimeShotTarget.y - rBody.position.y)));
             Destroy(this.gameObject); //Destroy the slime shot
         }
     }
@@ -66,12 +66,13 @@ public class SlimeShot : MonoBehaviour {
             if (enemySlime.SlimeType != slimePlayerScript.SlimerType)
             {
                 enemySlime.health -= damage;
-                Destroy(this.gameObject); //Destroy the slime shot
+                // apply knockback
+                coll.transform.GetComponent<Rigidbody2D>().AddForce(shotDirection * knockbackScale);
+               
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+
+            Destroy(gameObject); //Destroy the slime shot
+
         }
     }
 }

@@ -175,6 +175,11 @@ public abstract class PlayerSlime : MonoBehaviour {
     {
         Aim(); //Aim
         SlimeShotCooldown(); //The slime shot's cooldown
+
+        if (health <= 0) //If the player has no health
+        {
+            Destroy(gameObject); //He's dead, Jim!
+        }
 	}
 
 	// Update is called once per frame
@@ -218,6 +223,7 @@ public abstract class PlayerSlime : MonoBehaviour {
             float velx = Mathf.Clamp(rBody.velocity.x, -speed, speed);
             float vely = Mathf.Clamp(rBody.velocity.y, -speed, speed);
             rBody.velocity = new Vector2(velx, vely);
+            transform.up = rBody.velocity;
         }
         else
         {
@@ -243,7 +249,8 @@ public abstract class PlayerSlime : MonoBehaviour {
             if ((input.fireLeftInput != 0 || input.fireRightInput != 0) && damage1Cooldown <= 0.0f) //If the player is firing
             {
                 Instantiate(slimeShotGameObject, transform.position, Quaternion.identity); //Fire the slime shot
-                damage1Cooldown = 0.75f; //Set the damage cooldown
+                health--; //Decrement the player's health
+                damage1Cooldown = 0.65f; //Set the damage cooldown
             }
         }
         else //If the player is not aiming
@@ -308,5 +315,16 @@ public abstract class PlayerSlime : MonoBehaviour {
         //Vector3 moment = rBody.velocity + coll.GetComponent<Rigidbody2D>().velocity;
         //Vector3 unitMoment = moment.normalized;
         
+        if (coll.gameObject.tag == "Health") //If the player is picking up health
+        {
+            health += 5; //Give the player health
+
+            if (health > 200) //If the player's health is over 200
+            {
+                health = 200; //Cap the health
+            }
+
+            Destroy(coll.gameObject); //Destroy the health pickup
+        }
     }
 }

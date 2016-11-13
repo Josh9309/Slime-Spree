@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &152782
+--- !u!1 &162004
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 489220}
-  - 114: {fileID: 11488218}
-  - 114: {fileID: 11486070}
+  - 4: {fileID: 459750}
+  - 114: {fileID: 11403362}
+  - 114: {fileID: 11439260}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -17,38 +17,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &489220
+--- !u!4 &459750
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152782}
+  m_GameObject: {fileID: 162004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11486070
+--- !u!114 &11403362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65c80eddc1b063c4588b45cb06271b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackEnemies: 0
-  goalEnemies: 0
-  wave: 0
---- !u!114 &11488218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152782}
+  m_GameObject: {fileID: 162004}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f0bad0b5a0fe3d4eb90c1f979288628, type: 3}
@@ -59,22 +45,29 @@ MonoBehaviour:
   attackEnemies: []
   goalEnemyPrefab: {fileID: 150500, guid: 3c038f27d0e270f4aa1e6b8271ab0cb1, type: 2}
   attackEnemyPrefab: {fileID: 184850, guid: 83bbb5806af50194ea0d3003ecc4cd6a, type: 2}
+--- !u!114 &11439260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c80eddc1b063c4588b45cb06271b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackEnemies: 0
+  goalEnemies: 0
+  wave: 0
+  text: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: goalEnemyPrefab
-      value: 
-      objectReference: {fileID: 150500, guid: 3c038f27d0e270f4aa1e6b8271ab0cb1, type: 2}
-    - target: {fileID: 0}
-      propertyPath: goal
-      value: 
-      objectReference: {fileID: 150124, guid: b587cd65314012e4c967110bf5fe7a4d, type: 2}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 152782}
+  m_RootGameObject: {fileID: 162004}
   m_IsPrefabParent: 1

@@ -33,7 +33,7 @@ public class RedSlimePlayer : PlayerSlime {
             
             slimeBurstAnim.Play("SlimeBurst");
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
-            //Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+            Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
 
             foreach (Collider2D thing in cols)
             {
