@@ -44,6 +44,10 @@ public abstract class Enemy : MonoBehaviour {
     // Update is called once per frame
     protected virtual void Update()
     {
+        if (target == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Goal");
+        }
         Move();
         CheckIsAlive();
     }

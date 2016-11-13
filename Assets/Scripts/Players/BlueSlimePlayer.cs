@@ -18,6 +18,10 @@ public class BlueSlimePlayer : PlayerSlime {
        
     }
 
+    /// <summary>
+    /// Freeze shot, will shoot a projectile until it
+    /// hits something
+    /// </summary>
     protected override void SlimeAttack2()
     {
         throw new NotImplementedException();
