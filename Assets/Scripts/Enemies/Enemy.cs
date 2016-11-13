@@ -123,7 +123,7 @@ public abstract class Enemy : MonoBehaviour {
         Destroy(slimeshot);
     }
 
-    public IEnumerator EletrocuteEnemy(GameObject slimeshot)
+    public IEnumerator EletrocuteEnemy(GameObject slimeshot, int damage)
     {
         slimeshot.GetComponent<SpriteRenderer>().enabled = false;
         slimeshot.GetComponent<Collider2D>().enabled = false;
@@ -132,13 +132,14 @@ public abstract class Enemy : MonoBehaviour {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         shockStun = true;
 
+        health -= damage;
+
         yield return new WaitForSeconds(electricDuration);
 
         Debug.Log("Code Reached");
         Destroy(electric);
         rb.constraints = RigidbodyConstraints2D.None;
         shockStun = false;
-
         Destroy(slimeshot);
     }
 

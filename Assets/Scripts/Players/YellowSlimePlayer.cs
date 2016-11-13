@@ -24,7 +24,7 @@ public class YellowSlimePlayer : PlayerSlime {
     protected override void Update()
     {
         base.Update(); //Call the base update method
-
+        SlimeAttack2();
         SlimeUltimate();
         input.ResetBtns();
     }
