@@ -17,7 +17,15 @@ public class Acid : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy") //If the slime is colliding with the enemy
         {
-            Destroy(coll.gameObject); //Destroy the enemy
+            if (LevelManager.Instance.goalEnemies.Remove(coll.gameObject)) //Remove the gameobject from the list
+            {
+                Destroy(coll.gameObject); //This kills the enemy
+            }
+            else if (LevelManager.Instance.attackEnemies.Remove(coll.gameObject)) //Remove the gameobject from the list
+            {
+                Destroy(coll.gameObject); //This kills the enemy
+            }
+
             Destroy(gameObject); //Destroy this gameobject
         }
     }
