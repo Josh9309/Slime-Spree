@@ -88,14 +88,16 @@ public abstract class PlayerSlime : MonoBehaviour {
     [SerializeField] protected int playerNum = 1;
     [SerializeField] protected int attack1Down;
     [SerializeField] protected int slimeShotDamage;
-    [SerializeField] protected int slimeAttack2Damage;
-    [SerializeField] protected float slimeShotCooldown, slimeAttack2Cooldown;
+    [SerializeField] protected int slimeAttack2Damage, slimeUltimateDamage;
+    [SerializeField] protected float slimeShotCooldown, slimeAttack2Cooldown, slimeUltimateCooldown;
     [SerializeField] protected float damage1Cooldown, damage2Cooldown;
     [SerializeField] protected SlimeType slimerType;
     [SerializeField] protected float slimeShotRange;
     [SerializeField] private GameObject reticleSprite; //The reticle sprite
     [SerializeField] private GameObject slimeShotGameObject; //The slime shot prefab
     [SerializeField] private float knockbackScale;
+    protected bool slimeAttack2Available = true;
+    protected bool slimeUltimateAvailable = true;
     private GameObject reticle; //The reticle
     private SpriteRenderer reticleSR; //The reticle's sprite renderer
     private SpriteRenderer playerSR; //The reticle's sprite renderer
@@ -113,7 +115,7 @@ public abstract class PlayerSlime : MonoBehaviour {
     }
 
     //get set slime type
-    public SlimeType getSlimeType {
+    public SlimeType SlimerType {
         get { return slimerType; }
         set
         {
@@ -264,9 +266,21 @@ public abstract class PlayerSlime : MonoBehaviour {
         }
     }
 
-    protected abstract void SlimeAttack2Cooldown();
+    protected virtual IEnumerator SlimeAttack2Cooldown()
+    {
+        slimeAttack2Available = false;
 
-    protected abstract void SlimeUltimateCooldown();
+        yield return new WaitForSeconds(slimeAttack2Cooldown);
+        slimeAttack2Available = true;
+    }
+
+    protected virtual IEnumerator SlimeUltimateCooldown()
+    {
+        slimeUltimateAvailable = false;
+
+        yield return new WaitForSeconds(slimeUltimateCooldown);
+        slimeUltimateAvailable = true;
+    }
 
     protected void ModHealth(int mod)
     {

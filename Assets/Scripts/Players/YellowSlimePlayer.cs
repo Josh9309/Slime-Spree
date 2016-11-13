@@ -22,18 +22,9 @@ public class YellowSlimePlayer : PlayerSlime {
         throw new NotImplementedException();
     }
 
-    protected override void SlimeAttack2Cooldown()
-    {
-        throw new NotImplementedException();
-    }
-
     protected override void SlimeUltimate()
     {
         throw new NotImplementedException();
     }
 
-    protected override void SlimeUltimateCooldown()
-    {
-        throw new NotImplementedException();
-    }
 }

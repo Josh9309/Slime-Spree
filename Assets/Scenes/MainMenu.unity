@@ -181,7 +181,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .313521594, g: .772058845, b: .227076113, a: .0196078438}
+  m_BackGroundColor: {r: .399677873, g: .336937726, b: .558823526, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -310,51 +310,67 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 424.999939
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -242.765747
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 249.999878
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22402992, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 285.531494
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 424.999939
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -428.297241
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 249.999878
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22463104, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 285.531494
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457822, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457822, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457822, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457822, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0eb6c9ca5be280f4392e143254b05833, type: 2}
