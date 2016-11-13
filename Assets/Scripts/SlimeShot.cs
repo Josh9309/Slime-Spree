@@ -34,7 +34,7 @@ public class SlimeShot : MonoBehaviour {
                 break;
 
             case PlayerSlime.SlimeType.YELLOW:
-                player = GameObject.Find("BlueSlime(Clone)");
+                player = GameObject.Find("YellowSlime(Clone)");
                 break;
         }
 

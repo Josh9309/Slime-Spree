@@ -6,6 +6,7 @@ public class YellowSlimePlayer : PlayerSlime {
     #region Attributes
     [SerializeField] private int slimeWallCost;
     [SerializeField] private GameObject slimeLightingPrefab;
+    private GameObject slimeLightingWall;
     #endregion
 
     // Use this for initialization
@@ -32,9 +33,12 @@ public class YellowSlimePlayer : PlayerSlime {
     {
         if(input.ultimate && health > slimeWallCost && slimeUltimateAvailable)
         {
-            Debug.DrawLine(transform.position, reticle.transform.position, Color.yellow, 5);
-            Vector3 wallRightVector = reticle.transform.position - transform.position;
-            Instantiate(slimeLightingPrefab, transform.position, Quaternion.identity);
+            Debug.DrawLine(transform.position, Reticle.transform.position, Color.yellow, 5);
+            Vector3 wallRightVector = Reticle.transform.position - transform.position;
+            slimeLightingWall = Instantiate(slimeLightingPrefab, transform.position, Quaternion.identity) as GameObject;
+            slimeLightingWall.transform.right = wallRightVector;
+
+            StartCoroutine(SlimeUltimateCooldown());
         }
     }
 
