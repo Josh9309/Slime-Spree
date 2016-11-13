@@ -72,7 +72,6 @@ public class SlimeShot : MonoBehaviour {
             }
 
             Destroy(gameObject); //Destroy the slime shot
-
         }
     }
 }

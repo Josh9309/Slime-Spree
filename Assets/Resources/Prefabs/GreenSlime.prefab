@@ -80,8 +80,8 @@ MonoBehaviour:
   slimeAttack2Damage: 0
   slimeUltimateDamage: 0
   slimeShotCooldown: 1
-  slimeAttack2Cooldown: 0
-  slimeUltimateCooldown: 0
+  slimeAttack2Cooldown: 10
+  slimeUltimateCooldown: 30
   damage1Cooldown: 0
   damage2Cooldown: 0
   slimerType: 3
@@ -186,6 +186,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slimeAttack2Cooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slimeUltimateCooldown
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

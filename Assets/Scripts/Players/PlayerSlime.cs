@@ -177,7 +177,12 @@ public abstract class PlayerSlime : MonoBehaviour {
         {
             Destroy(gameObject); //He's dead, Jim!
         }
-	}
+
+        if (health > 200) //If the player's health is over 200
+        {
+            health = 200; //Cap the health
+        }
+    }
 
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -311,11 +316,6 @@ public abstract class PlayerSlime : MonoBehaviour {
         if (coll.gameObject.tag == "Health") //If the player is picking up health
         {
             health += 5; //Give the player health
-
-            if (health > 200) //If the player's health is over 200
-            {
-                health = 200; //Cap the health
-            }
 
             Destroy(coll.gameObject); //Destroy the health pickup
         }

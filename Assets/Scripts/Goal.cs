@@ -29,10 +29,10 @@ public class Goal : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log("Colliding");
+        //Debug.Log("Colliding");
         if (coll.gameObject.tag == "Enemy" && coll.gameObject.GetComponent<Enemy>().CanTriggerGoal == true)
         {
-            Debug.Log("Enemy " + coll.transform.name);
+            //Debug.Log("Enemy " + coll.transform.name);
             // decrement health by amount of damage that enemy does
             health -= coll.transform.GetComponent<Enemy>().Damage;
 
