@@ -7,15 +7,16 @@ public class GoalEnemy : Enemy {
     //-----ATTRIBUTES-----
     
     //--------------------
-
 	// Use this for initialization
-	public override void Start () {
+	protected override void Start () {
         base.Start();
+
+        canTriggerGoal = true;
 	}
 	
 	// Update is called once per frame
-	public override void Update () {
-        Move();
+	protected override void Update () {
+        base.Update();
 	}
 
 }

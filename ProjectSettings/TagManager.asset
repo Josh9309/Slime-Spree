@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - reticle
   - Goal
-  - Player
+  - Enemy
+  - Projectile
+  - Health
+  - Player Detector
   layers:
   - Default
   - TransparentFX

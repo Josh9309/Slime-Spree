@@ -3,22 +3,30 @@ using System.Collections;
 using System;
 
 public class AttackEnemy : Enemy {
-    /// <summary>
-    /// finds and returns the closest player relative
-    /// to the enemy
-    /// </summary>
-    public void findPlayer()
-    {
-
-    }
 
     // Use this for initialization
-    public override void Start () {
+    protected override void Start () {
         base.Start();
+
+        canTriggerGoal = false;
     }
-	
-	// Update is called once per frame
-	public override void Update () {
-        Move();
+
+    // Update is called once per frame
+    protected override void Update () {
+        base.Update();
 	}
+
+    /// <summary>
+    /// to check if the enemy is colliding with a player
+    /// </summary>
+    public override void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.transform.tag == "Player")
+        {
+            // knockback along inverted up vector
+            rb.AddForce(-1 * transform.up * knockbackScale);
+            coll.transform.GetComponent<Rigidbody2D>().AddForce(transform.up * knockbackScale);
+            coll.transform.GetComponent<PlayerSlime>().Health -= damage;
+        }
+    }
 }

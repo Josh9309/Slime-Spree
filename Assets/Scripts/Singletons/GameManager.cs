@@ -22,10 +22,11 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         //make players
-        players[0] = (GameObject)Instantiate(players[0], new Vector3(-2, 2, 0), Quaternion.identity);
-        players[1] = (GameObject)Instantiate(players[1], new Vector3(2, 2, 0), Quaternion.identity);
-        players[2] = (GameObject)Instantiate(players[2], new Vector3(2, -2, 0), Quaternion.identity);
-        players[3] = (GameObject)Instantiate(players[3], new Vector3(-2, -2, 0), Quaternion.identity);
+        players.Clear();
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/RedSlime", typeof(GameObject)), new Vector3(-2, 2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/BlueSlime", typeof(GameObject)), new Vector3(2, -2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/GreenSlime", typeof(GameObject)), new Vector3(2, 2, 0), Quaternion.identity));
+        players.Add((GameObject)Instantiate(Resources.Load("Prefabs/YellowSlime", typeof(GameObject)), new Vector3(-2, -2, 0), Quaternion.identity));
 
 
 
@@ -50,14 +51,13 @@ public class GameManager : Singleton<GameManager>
     public void StartRound()
     {
         // spawn the first wave
-        LevelManager.Instance.SpawnEnemies();
+        LevelManager.Instance.SpawnEnemies(10, 5);
     }
 
 
 
     void Update()
     {
-
 
     }
 }

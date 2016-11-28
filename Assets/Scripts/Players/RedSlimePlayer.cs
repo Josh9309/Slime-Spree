@@ -3,37 +3,119 @@ using System.Collections;
 using System;
 
 public class RedSlimePlayer : PlayerSlime {
-    
+    #region Attributes
+    [SerializeField] private float SlimeBurstRange = 2;
+    [SerializeField] private int SlimeBurstCost = 20;
+    [SerializeField] private GameObject SlimeBurstArea;
+    [SerializeField] private GameObject HealBurstArea;
+    [SerializeField] private GameObject SlimeBurstSprite;
+    [SerializeField] private Animator slimeBurstAnim;
+    //2 clips for each effect
+    public AudioClip redUlt;
+    public AudioClip redUlt2;
+    public AudioClip redSpec;
+    public AudioClip redSpec2;
+    private Behaviour bursthalo; //Ultimate halo
+    private Behaviour healhalo; //special halo
+
+    #endregion
 
     // Use this for initialization
     new void Start()
     {
         base.Start(); //Call the base start method
-	}
+        bursthalo = (Behaviour)SlimeBurstArea.GetComponent("Halo"); //Get the halo
+        healhalo = (Behaviour)HealBurstArea.GetComponent("Halo"); //Get the halo
+        bursthalo.enabled = false;
+        healhalo.enabled = false;
+    }
 	
 	// Update is called once per frame
 	new void Update()
     {
         base.Update(); //Call the base update method
+        SlimeUltimate();
+        SlimeAttack2();
+        input.ResetBtns();
 	}
 
+    
     protected override void SlimeAttack2()
     {
-        throw new NotImplementedException();
+        if (input.special != 0 && health > SlimeBurstCost && slimeAttack2Available)
+        {
+            //sound effect
+            SoundManager.instance.RandomizeSFx(redSpec, redSpec2);
+            StartCoroutine(DisplayHealBurst());
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
+            //Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+
+            foreach (Collider2D thing in cols)
+            {
+                if (thing.tag == "Player")// the slime burst has hit a player
+                {
+                    PlayerSlime slimePlayer = thing.GetComponent<PlayerSlime>();
+
+                    if (slimePlayer.SlimerType != PlayerSlime.SlimeType.RED)
+                    {
+                        slimePlayer.Health += 100; //kill enemy
+                    }
+
+                }
+            }
+
+            ModHealth(-SlimeBurstCost); //decrease players health by the cost of the attack
+            StartCoroutine(SlimeAttack2Cooldown());
+        }
     }
 
-    protected override void SlimeAttack2Cooldown()
-    {
-        throw new NotImplementedException();
-    }
-
+    //Red Slime SlimeBurst AOE Attack
     protected override void SlimeUltimate()
     {
-        throw new NotImplementedException();
+        if (input.ultimate && health > SlimeBurstCost && slimeUltimateAvailable)
+        {
+            SoundManager.instance.RandomizeSFx(redUlt, redUlt2);
+
+            StartCoroutine(DisplaySlimeBurst());
+
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, SlimeBurstRange);
+           // Debug.DrawLine(gameObject.transform.position, new Vector3(transform.position.x + SlimeBurstRange, transform.position.y, transform.position.z), Color.black, 4);
+
+            foreach (Collider2D thing in cols)
+            {
+                if (thing.tag == "Enemy")// the slime burst has hit a enemy
+                {
+                    Enemy slimeEnemy = thing.GetComponent<Enemy>();
+
+                    //check to see if enemy slime is not same type as player
+                    if (slimeEnemy.SlimeType != PlayerSlime.SlimeType.RED)
+                    {
+                        slimeEnemy.health = 0; //kill enemy
+                    }
+                }
+            }
+
+            ModHealth(-SlimeBurstCost); //decrease players health by the cost of the attack
+            StartCoroutine(SlimeUltimateCooldown());
+        }
     }
 
-    protected override void SlimeUltimateCooldown()
+    private IEnumerator DisplaySlimeBurst()
     {
-        throw new NotImplementedException();
+        bursthalo.enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        bursthalo.enabled = false;
     }
+
+    private IEnumerator DisplayHealBurst()
+    {
+        healhalo.enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        healhalo.enabled = false;
+    }
+
 }
